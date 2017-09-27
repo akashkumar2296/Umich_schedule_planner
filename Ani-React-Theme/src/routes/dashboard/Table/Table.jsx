@@ -8,6 +8,7 @@ class Tables extends Component {
     setTitle: PropTypes.func.isRequired,
   };
 
+
   componentWillMount() {
     // console.log(this.context);
     this.context.setTitle(title);
@@ -19,32 +20,32 @@ class Tables extends Component {
         <div className="row">
           <div className="col-md-6">
             <Panel
-              header={<span>Regular Table</span>}
+              header={<span>Pre-Requisites</span>}
               bsStyle="primary"
             >
               <Table>
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
+                    <th>Class</th>
+                    <th>Satisfied</th>
+                    <th>Credits</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
+                    <td>EECS 183</td>
+                    <td>Yes</td>
+                    <td>4</td>
                   </tr>
                   <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
+                    <td>EECS 203</td>
+                    <td>Yes</td>
+                    <td>4</td>
                   </tr>
                   <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
+                    <td>EECS 280</td>
+                    <td>Yes</td>
+                    <td>4</td>
                   </tr>
                 </tbody>
               </Table>
