@@ -24,6 +24,7 @@
     }
   }
   & .widgetsContent {
+    display: none;
     padding: 12px;
     overflow: hidden;
     & .avatarName {

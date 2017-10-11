@@ -202,7 +202,7 @@ class Tables extends Component {
               </Table>
             </Panel>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6" class="hidden">
             <Panel
               header={<span>Bordered Table</span>}
               bsStyle="default"
@@ -238,7 +238,7 @@ class Tables extends Component {
         </div>
 
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6" class="hidden">
             <Panel
               header={<span>Striped Table</span>}
               bsStyle="info"
@@ -271,7 +271,7 @@ class Tables extends Component {
               </Table>
             </Panel>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6" class="hidden">
             <Panel
               header={<span>Hover Table</span>}
               bsStyle="success"
@@ -306,7 +306,7 @@ class Tables extends Component {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row" class="hidden">
           <div className="col-md-6">
             <Panel
               header={<span>Condensed Table</span>}
@@ -375,7 +375,7 @@ class Tables extends Component {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row" class="hidden">
           <div className="col-sm-12">
             <Panel
               header={<span>Coloured Table</span>}

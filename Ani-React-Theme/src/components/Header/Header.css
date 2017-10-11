@@ -58,12 +58,17 @@
   margin: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 
 
 .topNavbar {
   background: none;
   border-radius: 0;
   border: none;
+  display: none;
 
   & .navbarHeader {
     width: var(--nav-width);
