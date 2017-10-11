@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Panel, Table } from 'react-bootstrap';
-
+import ReactDOM from 'react-dom';
 const title = 'Table';
 const preReq = ['Engineering', 'Chemistry', 'Physics', 'Math', 'Intellectual Breadth', 'General Electives'];
 
@@ -33,11 +33,73 @@ const Intellectual_Breadth = [
 const General_electives = [
 {class: 'General Electives', satisfied: 'Yes', credits:'15'}];
 
+const progCore = ['Computer Science', 'Probability and Statistics',
+'Technical Communications']
 
-function Table(props){
-  
+const techElec = ['Upper Level CS', 'Flexible Technical Electives']
+
+const mde_prog = ['Project Course', 'Computer Professionalism', 'Writing and Oracl Presentation'];
+
+const compsci = [
+{class: 'EECS 203', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 280', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 281', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 370', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 376', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 496', satisfied: 'Yes', credits:'4'}];
+
+const probStats =
+[{class: 'STATS 250', satisfied: 'Yes', credits:'4'}];
+
+const techCom300 = [
+{class: 'TCHNCLCM 300', satisfied: 'Yes', credits: '1'}];
+
+const techElectives = [
+{class: 'EECS 3XX', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 3XX', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 4XX', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 4XX', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 4XX', satisfied: 'Yes', credits:'4'}];
+
+const mde = [
+{class: 'EECS 497', satisfied: 'Yes', credits:'4'}];
+
+const compProf = [
+{class: 'EECS 496', satisfied: 'Yes', credits:'4'}];
+
+const techCom497 = [
+{class: 'TCHLCLCM 497', satisfied: 'Yes', credits:'2'}];
+
+
+class TableRow extends React.Component {
+  render() {
+    const {
+      data
+    } = this.props;
+    const row = data.map((data) =>
+      <tr>
+      <td>{data.class}</td>
+      <td>{data.satisfied}</td>
+      <td>{data.credits}</td>
+      </tr>
+    );
+    return (
+      <tbody>{row}</tbody>
+    );
+  }
 }
 
+class Tabler extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+        <TableRow data={this.props.data} />
+    );
+  }
+}
 
 
 class Tables extends Component {
@@ -46,13 +108,27 @@ class Tables extends Component {
   };
 
   componentWillMount() {
-    // console.log(this.context);
     this.context.setTitle(title);
   }
 
   render() {
     return (
+  
+
       <div className="animate">
+      <select>
+      <option value="volvo">freshman</option>
+      <option value="saab">sophomore</option>
+      <option value="opel">junior</option>
+      <option value="audi">senior</option>
+      </select>
+
+      <select>
+      <option value="volvo">Difficulty Level: 1</option>
+      <option value="saab">Difficulty Level: 2</option>
+      <option value="opel">Difficulty Level: 3</option>
+      <option value="audi">Difficulty Level: 4</option>
+      </select>
         <div className="row">
           <div className="col-md-6">
             <Panel
@@ -67,364 +143,43 @@ class Tables extends Component {
                   <th>Credits</th>
                 </tr>
               </thead>
-                <thead>
-                  <tr>
-                    <th>{preReq[0]}</th>
-                  </tr>
-                </thead>
-              
-                <tbody>
-                  <tr>
-                    <td>{egr[0]['class']}</td>
-                    <td>{egr[0]['satisfied']}</td>
-                    <td>{egr[0]['credits']}</td>
-                  </tr>
-                  <tr>
-                    <td>{egr[1]['class']}</td>
-                    <td>{egr[1]['satisfied']}</td>
-                    <td>{egr[1]['credits']}</td>
-                  </tr>
-                </tbody>
-              
-              <thead>
-                <tr>
-                  <th>{preReq[1]}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{chemistry[0]['class']}</td>
-                  <td>{chemistry[0]['satisfied']}</td>
-                  <td>{chemistry[0]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{chemistry[1]['class']}</td>
-                  <td>{chemistry[1]['satisfied']}</td>
-                  <td>{chemistry[1]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{chemistry[2]['class']}</td>
-                  <td>{chemistry[2]['satisfied']}</td>
-                  <td>{chemistry[2]['credits']}</td>
-                </tr>
-              </tbody>
-
-            
-              <thead>
-              <tr>
-              <th>{preReq[2]}</th>
-              </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{physics[0]['class']}</td>
-                  <td>{physics[0]['satisfied']}</td>
-                  <td>{physics[0]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{physics[1]['class']}</td>
-                  <td>{physics[1]['satisfied']}</td>
-                  <td>{physics[1]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{physics[2]['class']}</td>
-                  <td>{physics[2]['satisfied']}</td>
-                  <td>{physics[2]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{physics[3]['class']}</td>
-                  <td>{physics[3]['satisfied']}</td>
-                  <td>{physics[3]['credits']}</td>
-                </tr>
-              </tbody>
-
-              <br></br>
-              
-              <thead>
-              <tr>
-              <th>{preReq[3]}</th>
-              </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{math[0]['class']}</td>
-                  <td>{math[0]['satisfied']}</td>
-                  <td>{math[0]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{math[1]['class']}</td>
-                  <td>{math[1]['satisfied']}</td>
-                  <td>{math[1]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{math[2]['class']}</td>
-                  <td>{math[2]['satisfied']}</td>
-                  <td>{math[2]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{math[3]['class']}</td>
-                  <td>{math[3]['satisfied']}</td>
-                  <td>{math[3]['credits']}</td>
-                </tr>
-              </tbody>
-              
-              
-              <thead>
-              <tr>
-              <th>{preReq[4]}</th>
-              </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{Intellectual_Breadth[0]['class']}</td>
-                  <td>{Intellectual_Breadth[0]['satisfied']}</td>
-                  <td>{Intellectual_Breadth[0]['credits']}</td>
-                </tr>
-                <tr>
-                  <td>{Intellectual_Breadth[1]['class']}</td>
-                  <td>{Intellectual_Breadth[1]['satisfied']}</td>
-                  <td>{Intellectual_Breadth[1]['credits']}</td>
-                </tr>
-              </tbody>
-              
-              
-              <thead>
-              <tr>
-              <th>{preReq[5]}</th>
-              </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{General_electives[0]['class']}</td>
-                  <td>{General_electives[0]['satisfied']}</td>
-                  <td>{General_electives[0]['credits']}</td>
-                </tr>
-              </tbody>
-      
+              <Tabler data={egr}/>
+              <Tabler data={chemistry}/>
+              <Tabler data={physics}/>
+              <Tabler data={math}/>
+              <Tabler data={Intellectual_Breadth}/>
+              <Tabler data={General_electives}/>
               </Table>
             </Panel>
           </div>
-          <div className="col-md-6" class="hidden">
-            <Panel
-              header={<span>Bordered Table</span>}
-              bsStyle="default"
-            >
-              <Table bordered>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="col-md-6" class="hidden">
-            <Panel
-              header={<span>Striped Table</span>}
-              bsStyle="info"
-            >
-              <Table striped>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-          <div className="col-md-6" class="hidden">
-            <Panel
-              header={<span>Hover Table</span>}
-              bsStyle="success"
-            >
-              <Table hover>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-        </div>
-
-        <div className="row" class="hidden">
           <div className="col-md-6">
             <Panel
-              header={<span>Condensed Table</span>}
-              bsStyle="danger"
-            >
-              <Table condensed>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                </tbody>
+              header={<span>CSE Program Requirements</span>}
+              bsStyle="success" 
+              >
+              <Table>
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Satisfied</th>
+                  <th>Credits</th>
+                </tr>
+              </thead>
+              <Tabler data={compsci}/>
+              <Tabler data={probStats}/>
+              <Tabler data={techCom300}/>
+              <Tabler data={techElectives}/>
+              <Tabler data={mde}/>
+              <Tabler data={compProf}/>
+              <Tabler data={techCom497}/>
               </Table>
             </Panel>
           </div>
-          <div className="col-md-6">
-            <Panel
-              header={<span>Condensed, Bordered, Striped Table</span>}
-              bsStyle="warning"
-            >
-              <Table condensed bordered striped>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-        </div>
 
-        <div className="row" class="hidden">
-          <div className="col-sm-12">
-            <Panel
-              header={<span>Coloured Table</span>}
-              bsStyle="default"
-            >
-              <Table bordered className="white">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="success">
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr className="info">
-                    <td>Andy</td>
-                    <td>andy@gmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr className="warning">
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                  <tr className="danger">
-                    <td>Rickie</td>
-                    <td>rickie@gmail.com</td>
-                    <td>Burnley, UK</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
         </div>
-
       </div>
-    );
+      );
   }
 }
 
