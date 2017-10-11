@@ -33,6 +33,13 @@ const Intellectual_Breadth = [
 const General_electives = [
 {class: 'General Electives', satisfied: 'Yes', credits:'15'}];
 
+
+function Table(props){
+  
+}
+
+
+
 class Tables extends Component {
   static contextTypes = {
     setTitle: PropTypes.func.isRequired,
