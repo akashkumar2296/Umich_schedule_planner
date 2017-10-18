@@ -1,8 +1,11 @@
 @import '../variables.css';
 
+.semesters {
+  position: fixed;
+}
+
 .sideWidgets {
   margin-left: 45px;
-  color: color(var(--brand-black) a(80%));
   float: left;
   border-top: 1px solid color(var(--brand-primary) blackness(6%));
   width: calc(var(--nav-width ) - 45px);
@@ -24,9 +27,9 @@
     }
   }
   & .widgetsContent {
-    display: none;
     padding: 12px;
     overflow: hidden;
+    width: 355px;
     & .avatarName {
       padding-top: 12px;
     }
@@ -147,6 +150,10 @@
       }
     }
   }
+}
+
+.record-count{
+  display: none;
 }
 
 :global(.rc-select-dropdown) {

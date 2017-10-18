@@ -5,7 +5,7 @@
 
 // Base class
 .panel {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   background-color: $panel-bg;
   border: 1px solid transparent;
   border-radius: $panel-border-radius;
@@ -14,7 +14,8 @@
 
 // Panel contents
 .panel-body {
-  padding: $panel-body-padding;
+  padding: 0px;
+  background-color: white;
   @include clearfix;
 }
 

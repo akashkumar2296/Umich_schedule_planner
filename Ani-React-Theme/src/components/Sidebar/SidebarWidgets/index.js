@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './SidebarWidgets.css';
-import SidebarProfile from './SidebarProfile';
-import SidebarCalendar from './SidebarCalendar';
-import SidebarNewsFeed from './SidebarNewsFeed';
-
+import FilterableClassesTable from './SidebarClasses';
 
 class SidebarWidgets extends Component { // eslint-disable-line
   render() {
     return (
       <div className={`sideWidgets ${s.sideWidgets}`}>
         <div className={`widgets-content ${s.widgetsContent}`}>
-          <SidebarProfile />
-          <SidebarCalendar />
-          <SidebarNewsFeed />
+          <FilterableClassesTable />
         </div>
       </div>
     );

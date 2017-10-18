@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Panel, Table } from 'react-bootstrap';
+import Collapsible from 'react-collapsible';
+import s from './Table.css';
 
 const title = 'Table';
 const preReq = ['Engineering', 'Chemistry', 'Physics', 'Math', 'Intellectual Breadth', 'General Electives'];
@@ -46,13 +48,15 @@ class Tables extends Component {
   render() {
     return (
       <div className="animate">
+      <div className={s.requirements}>
         <div className="row">
           <div className="col-md-6">
-            <Panel
-              header={<span>Pre-Requisites</span>}
-              bsStyle="primary" 
-              >
-              <Table>
+          <Collapsible
+            trigger={<Panel
+              header={<span class="panel-title">Program Core</span>}
+              bsStyle="primary"></Panel>}
+            classParentString = "" contentOuterClassName="panel-body">
+              <Table table-hover>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -200,222 +204,119 @@ class Tables extends Component {
               </tbody>
       
               </Table>
-            </Panel>
-          </div>
-          <div className="col-md-6" class="hidden">
-            <Panel
-              header={<span>Bordered Table</span>}
-              bsStyle="default"
-            >
-              <Table bordered>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Panel>
+            </Collapsible>
           </div>
         </div>
+        </div>
 
+        <div className={s.semester}>
         <div className="row">
-          <div className="col-md-6" class="hidden">
+          <div className="col-md-3">
             <Panel
-              header={<span>Striped Table</span>}
-              bsStyle="info"
+              header={<span>Winter 2018</span>}
+              bsStyle="primary"
             >
-              <Table striped>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
+              <Table primary>
                 <tbody>
                   <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
                   </tr>
                 </tbody>
               </Table>
             </Panel>
           </div>
-          <div className="col-md-6" class="hidden">
+          <div className="col-md-3">
             <Panel
-              header={<span>Hover Table</span>}
-              bsStyle="success"
+              header={<span>Fall 2018</span>}
+              bsStyle="primary"
             >
-              <Table hover>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
+              <Table primary>
                 <tbody>
                   <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
                   </tr>
                 </tbody>
               </Table>
             </Panel>
           </div>
-        </div>
-
-        <div className="row" class="hidden">
-          <div className="col-md-6">
+          <div className="col-md-3">
             <Panel
-              header={<span>Condensed Table</span>}
-              bsStyle="danger"
+              header={<span>Winter 2019</span>}
+              bsStyle="primary"
             >
-              <Table condensed>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
+              <Table primary>
                 <tbody>
                   <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
                   </tr>
                 </tbody>
               </Table>
             </Panel>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-3">
             <Panel
-              header={<span>Condensed, Bordered, Striped Table</span>}
-              bsStyle="warning"
+              header={<span>Fall 2019</span>}
+              bsStyle="primary"
             >
-              <Table condensed bordered striped>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
+              <Table primary>
                 <tbody>
                   <tr>
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Andy</td>
-                    <td>andygmail.com</td>
-                    <td>Merseyside, UK</td>
+                    <td>&nbsp;</td>
                   </tr>
                   <tr>
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
                   </tr>
                 </tbody>
               </Table>
             </Panel>
           </div>
         </div>
-
-        <div className="row" class="hidden">
-          <div className="col-sm-12">
-            <Panel
-              header={<span>Coloured Table</span>}
-              bsStyle="default"
-            >
-              <Table bordered className="white">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="success">
-                    <td>John</td>
-                    <td>john@gmail.com</td>
-                    <td>London, UK</td>
-                  </tr>
-                  <tr className="info">
-                    <td>Andy</td>
-                    <td>andy@gmail.com</td>
-                    <td>Merseyside, UK</td>
-                  </tr>
-                  <tr className="warning">
-                    <td>Frank</td>
-                    <td>frank@gmail.com</td>
-                    <td>Southampton, UK</td>
-                  </tr>
-                  <tr className="danger">
-                    <td>Rickie</td>
-                    <td>rickie@gmail.com</td>
-                    <td>Burnley, UK</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-        </div>
-
+      </div>
       </div>
     );
   }
