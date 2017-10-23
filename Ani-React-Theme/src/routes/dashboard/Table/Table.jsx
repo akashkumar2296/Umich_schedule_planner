@@ -40,11 +40,6 @@ class Tables extends Component {
     setTitle: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
-    // console.log(this.context);
-    this.context.setTitle(title);
-  }
-
   render() {
     return (
       <div className="animate">
@@ -53,10 +48,11 @@ class Tables extends Component {
           <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span class="panel-title">Program Core</span>}
+              header={<span class="panel-title">Core Requirements</span>}
               bsStyle="primary"></Panel>}
-            classParentString = "" contentOuterClassName="panel-body">
-              <Table table-hover>
+            classParentString = "" contentOuterClassName="panel-body" open="true"
+            overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
+              <Table table-hove>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -69,7 +65,6 @@ class Tables extends Component {
                     <th>{preReq[0]}</th>
                   </tr>
                 </thead>
-              
                 <tbody>
                   <tr>
                     <td>{egr[0]['class']}</td>
@@ -202,19 +197,489 @@ class Tables extends Component {
                   <td>{General_electives[0]['credits']}</td>
                 </tr>
               </tbody>
-      
+              </Table>
+            </Collapsible>
+          </div>
+          <div className="col-md-6">
+          <Collapsible
+            trigger={<Panel
+              header={<span class="panel-title">Program Core</span>}
+              bsStyle="primary"></Panel>}
+            classParentString = "" contentOuterClassName="panel-body" open="true"
+            overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
+              <Table table-hove>
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Satisfied</th>
+                  <th>Credits</th>
+                </tr>
+              </thead>
+                <thead>
+                  <tr>
+                    <th>{preReq[0]}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{egr[0]['class']}</td>
+                    <td>{egr[0]['satisfied']}</td>
+                    <td>{egr[0]['credits']}</td>
+                  </tr>
+                  <tr>
+                    <td>{egr[1]['class']}</td>
+                    <td>{egr[1]['satisfied']}</td>
+                    <td>{egr[1]['credits']}</td>
+                  </tr>
+                </tbody>
+              
+              <thead>
+                <tr>
+                  <th>{preReq[1]}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{chemistry[0]['class']}</td>
+                  <td>{chemistry[0]['satisfied']}</td>
+                  <td>{chemistry[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{chemistry[1]['class']}</td>
+                  <td>{chemistry[1]['satisfied']}</td>
+                  <td>{chemistry[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{chemistry[2]['class']}</td>
+                  <td>{chemistry[2]['satisfied']}</td>
+                  <td>{chemistry[2]['credits']}</td>
+                </tr>
+              </tbody>
+
+            
+              <thead>
+              <tr>
+              <th>{preReq[2]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{physics[0]['class']}</td>
+                  <td>{physics[0]['satisfied']}</td>
+                  <td>{physics[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[1]['class']}</td>
+                  <td>{physics[1]['satisfied']}</td>
+                  <td>{physics[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[2]['class']}</td>
+                  <td>{physics[2]['satisfied']}</td>
+                  <td>{physics[2]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[3]['class']}</td>
+                  <td>{physics[3]['satisfied']}</td>
+                  <td>{physics[3]['credits']}</td>
+                </tr>
+              </tbody>
+
+              <br></br>
+              
+              <thead>
+              <tr>
+              <th>{preReq[3]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{math[0]['class']}</td>
+                  <td>{math[0]['satisfied']}</td>
+                  <td>{math[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[1]['class']}</td>
+                  <td>{math[1]['satisfied']}</td>
+                  <td>{math[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[2]['class']}</td>
+                  <td>{math[2]['satisfied']}</td>
+                  <td>{math[2]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[3]['class']}</td>
+                  <td>{math[3]['satisfied']}</td>
+                  <td>{math[3]['credits']}</td>
+                </tr>
+              </tbody>
+              
+              
+              <thead>
+              <tr>
+              <th>{preReq[4]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{Intellectual_Breadth[0]['class']}</td>
+                  <td>{Intellectual_Breadth[0]['satisfied']}</td>
+                  <td>{Intellectual_Breadth[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{Intellectual_Breadth[1]['class']}</td>
+                  <td>{Intellectual_Breadth[1]['satisfied']}</td>
+                  <td>{Intellectual_Breadth[1]['credits']}</td>
+                </tr>
+              </tbody>
+              
+              
+              <thead>
+              <tr>
+              <th>{preReq[5]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{General_electives[0]['class']}</td>
+                  <td>{General_electives[0]['satisfied']}</td>
+                  <td>{General_electives[0]['credits']}</td>
+                </tr>
+              </tbody>
               </Table>
             </Collapsible>
           </div>
         </div>
+
+        <div className="row">
+          <div className="col-md-6">
+          <Collapsible
+            trigger={<Panel
+              header={<span class="panel-title">Technical Electives</span>}
+              bsStyle="primary"></Panel>}
+            classParentString = "" contentOuterClassName="panel-body" open="true"
+            overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
+              <Table table-hover>
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Satisfied</th>
+                  <th>Credits</th>
+                </tr>
+              </thead>
+                <thead>
+                  <tr>
+                    <th>{preReq[0]}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{egr[0]['class']}</td>
+                    <td>{egr[0]['satisfied']}</td>
+                    <td>{egr[0]['credits']}</td>
+                  </tr>
+                  <tr>
+                    <td>{egr[1]['class']}</td>
+                    <td>{egr[1]['satisfied']}</td>
+                    <td>{egr[1]['credits']}</td>
+                  </tr>
+                </tbody>
+              
+              <thead>
+                <tr>
+                  <th>{preReq[1]}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{chemistry[0]['class']}</td>
+                  <td>{chemistry[0]['satisfied']}</td>
+                  <td>{chemistry[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{chemistry[1]['class']}</td>
+                  <td>{chemistry[1]['satisfied']}</td>
+                  <td>{chemistry[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{chemistry[2]['class']}</td>
+                  <td>{chemistry[2]['satisfied']}</td>
+                  <td>{chemistry[2]['credits']}</td>
+                </tr>
+              </tbody>
+
+            
+              <thead>
+              <tr>
+              <th>{preReq[2]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{physics[0]['class']}</td>
+                  <td>{physics[0]['satisfied']}</td>
+                  <td>{physics[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[1]['class']}</td>
+                  <td>{physics[1]['satisfied']}</td>
+                  <td>{physics[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[2]['class']}</td>
+                  <td>{physics[2]['satisfied']}</td>
+                  <td>{physics[2]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[3]['class']}</td>
+                  <td>{physics[3]['satisfied']}</td>
+                  <td>{physics[3]['credits']}</td>
+                </tr>
+              </tbody>
+
+              <br></br>
+              
+              <thead>
+              <tr>
+              <th>{preReq[3]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{math[0]['class']}</td>
+                  <td>{math[0]['satisfied']}</td>
+                  <td>{math[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[1]['class']}</td>
+                  <td>{math[1]['satisfied']}</td>
+                  <td>{math[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[2]['class']}</td>
+                  <td>{math[2]['satisfied']}</td>
+                  <td>{math[2]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[3]['class']}</td>
+                  <td>{math[3]['satisfied']}</td>
+                  <td>{math[3]['credits']}</td>
+                </tr>
+              </tbody>
+              
+              
+              <thead>
+              <tr>
+              <th>{preReq[4]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{Intellectual_Breadth[0]['class']}</td>
+                  <td>{Intellectual_Breadth[0]['satisfied']}</td>
+                  <td>{Intellectual_Breadth[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{Intellectual_Breadth[1]['class']}</td>
+                  <td>{Intellectual_Breadth[1]['satisfied']}</td>
+                  <td>{Intellectual_Breadth[1]['credits']}</td>
+                </tr>
+              </tbody>
+              
+              
+              <thead>
+              <tr>
+              <th>{preReq[5]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{General_electives[0]['class']}</td>
+                  <td>{General_electives[0]['satisfied']}</td>
+                  <td>{General_electives[0]['credits']}</td>
+                </tr>
+              </tbody>
+              </Table>
+            </Collapsible>
+          </div>
+
+<div className="col-md-6">
+          <Collapsible
+            trigger={<Panel
+              header={<span class="panel-title">Major Design Experience</span>}
+              bsStyle="primary"></Panel>}
+            classParentString = "" contentOuterClassName="panel-body" open="true"
+            overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
+              <Table table-hover>
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Satisfied</th>
+                  <th>Credits</th>
+                </tr>
+              </thead>
+                <thead>
+                  <tr>
+                    <th>{preReq[0]}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{egr[0]['class']}</td>
+                    <td>{egr[0]['satisfied']}</td>
+                    <td>{egr[0]['credits']}</td>
+                  </tr>
+                  <tr>
+                    <td>{egr[1]['class']}</td>
+                    <td>{egr[1]['satisfied']}</td>
+                    <td>{egr[1]['credits']}</td>
+                  </tr>
+                </tbody>
+              
+              <thead>
+                <tr>
+                  <th>{preReq[1]}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{chemistry[0]['class']}</td>
+                  <td>{chemistry[0]['satisfied']}</td>
+                  <td>{chemistry[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{chemistry[1]['class']}</td>
+                  <td>{chemistry[1]['satisfied']}</td>
+                  <td>{chemistry[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{chemistry[2]['class']}</td>
+                  <td>{chemistry[2]['satisfied']}</td>
+                  <td>{chemistry[2]['credits']}</td>
+                </tr>
+              </tbody>
+
+            
+              <thead>
+              <tr>
+              <th>{preReq[2]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{physics[0]['class']}</td>
+                  <td>{physics[0]['satisfied']}</td>
+                  <td>{physics[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[1]['class']}</td>
+                  <td>{physics[1]['satisfied']}</td>
+                  <td>{physics[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[2]['class']}</td>
+                  <td>{physics[2]['satisfied']}</td>
+                  <td>{physics[2]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{physics[3]['class']}</td>
+                  <td>{physics[3]['satisfied']}</td>
+                  <td>{physics[3]['credits']}</td>
+                </tr>
+              </tbody>
+
+              <br></br>
+              
+              <thead>
+              <tr>
+              <th>{preReq[3]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{math[0]['class']}</td>
+                  <td>{math[0]['satisfied']}</td>
+                  <td>{math[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[1]['class']}</td>
+                  <td>{math[1]['satisfied']}</td>
+                  <td>{math[1]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[2]['class']}</td>
+                  <td>{math[2]['satisfied']}</td>
+                  <td>{math[2]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{math[3]['class']}</td>
+                  <td>{math[3]['satisfied']}</td>
+                  <td>{math[3]['credits']}</td>
+                </tr>
+              </tbody>
+              
+              
+              <thead>
+              <tr>
+              <th>{preReq[4]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{Intellectual_Breadth[0]['class']}</td>
+                  <td>{Intellectual_Breadth[0]['satisfied']}</td>
+                  <td>{Intellectual_Breadth[0]['credits']}</td>
+                </tr>
+                <tr>
+                  <td>{Intellectual_Breadth[1]['class']}</td>
+                  <td>{Intellectual_Breadth[1]['satisfied']}</td>
+                  <td>{Intellectual_Breadth[1]['credits']}</td>
+                </tr>
+              </tbody>
+              
+              
+              <thead>
+              <tr>
+              <th>{preReq[5]}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{General_electives[0]['class']}</td>
+                  <td>{General_electives[0]['satisfied']}</td>
+                  <td>{General_electives[0]['credits']}</td>
+                </tr>
+              </tbody>
+              </Table>
+            </Collapsible>
+          </div>
         </div>
+
+        </div>
+
 
         <div className={s.semester}>
         <div className="row">
           <div className="col-md-3">
             <Panel
               header={<span>Winter 2018</span>}
-              bsStyle="primary"
+              bsStyle="danger"
             >
               <Table primary>
                 <tbody>
@@ -240,7 +705,7 @@ class Tables extends Component {
           <div className="col-md-3">
             <Panel
               header={<span>Fall 2018</span>}
-              bsStyle="primary"
+              bsStyle="warning"
             >
               <Table primary>
                 <tbody>
@@ -266,7 +731,7 @@ class Tables extends Component {
           <div className="col-md-3">
             <Panel
               header={<span>Winter 2019</span>}
-              bsStyle="primary"
+              bsStyle="success"
             >
               <Table primary>
                 <tbody>
@@ -292,7 +757,7 @@ class Tables extends Component {
           <div className="col-md-3">
             <Panel
               header={<span>Fall 2019</span>}
-              bsStyle="primary"
+              bsStyle="info"
             >
               <Table primary>
                 <tbody>
