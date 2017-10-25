@@ -1,8 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Panel, Table } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
+import Collapsible from 'react-collapsible';
+import s from './Table.css';
+
 const title = 'Table';
 const preReq = ['Engineering', 'Chemistry', 'Physics', 'Math', 'Intellectual Breadth', 'General Electives'];
+
+const classes_taken = ['EECS 183', 'EECS 203', 'EECS 280', 'EECS 281'];
 
 const egr = [
 {class: 'Engineering 100', satisfied: 'Yes', credits:'4'},
@@ -16,14 +21,14 @@ const chemistry = [
 const physics = [
 {class: 'Physics 140', satisfied: 'Yes', credits:'4'},
 {class: 'Physics 141', satisfied: 'Yes', credits:'2'},
-{class: 'Physics 240', satisfied: 'Yes', credits:'4'},
+{class: 'Physics 240', satisfied: 'Yes', credits:'4', 'pre-req':['Physics 140', 'Physics 141']},
 {class: 'Physics 241', satisfied: 'Yes', credits:'2'}];
 
 const math = [
 {class: 'Math 115/120', satisfied: 'Yes', credits:'4'},
 {class: 'Math 116/121', satisfied: 'Yes', credits:'4'},
-{class: 'Math 214/217/417/419', satisfied: 'Yes', credits:'4'},
-{class: 'Math 215/216', satisfied: 'Yes', credits:'4'}];
+{class: 'Math 214/217/417/419', satisfied: 'Yes', credits:'4', 'pre-req':['Math 115/120', 'Math 116/121']},
+{class: 'Math 215/216', satisfied: 'Yes', credits:'4', 'pre-req':['Math 115/120', 'Math 116/121']}];
 
 const Intellectual_Breadth = [
 {class: 'Humanities', satisfied: 'Yes', credits:'3'},
@@ -41,12 +46,20 @@ const techElec = ['Upper Level CS', 'Flexible Technical Electives']
 const mde_prog = ['Project Course', 'Computer Professionalism', 'Writing and Oracl Presentation'];
 
 const compsci = [
-{class: 'EECS 203', satisfied: 'Yes', credits:'4'},
-{class: 'EECS 280', satisfied: 'Yes', credits:'4'},
-{class: 'EECS 281', satisfied: 'Yes', credits:'4'},
-{class: 'EECS 370', satisfied: 'Yes', credits:'4'},
-{class: 'EECS 376', satisfied: 'Yes', credits:'4'},
+{class: 'EECS 203', satisfied: 'Yes', credits:'4', 'pre-req':['Engineering 101']},
+{class: 'EECS 280', satisfied: 'Yes', credits:'4', 'pre-req':['Engineering 101']},
+{class: 'EECS 281', satisfied: 'Yes', credits:'4', 'pre-req':['EECS 280']},
+{class: 'EECS 370', satisfied: 'Yes', credits:'4', 'pre-req':['EECS 280']},
+{class: 'EECS 376', satisfied: 'Yes', credits:'4', 'pre-req':['EECS 280']},
 {class: 'EECS 496', satisfied: 'Yes', credits:'4'}];
+
+for(var i = 0; i < compsci.length; i++){
+  for(var j = 0; j < compsci[i]['pre-req'].length; j++){
+    if(!(compsci[i]['pre-req'][j] in classes_taken)){
+      compsci[i]['satisfied'] = 'No';
+    }
+  }
+}
 
 const probStats =
 [{class: 'STATS 250', satisfied: 'Yes', credits:'4'}];
@@ -116,6 +129,7 @@ class Tables extends Component {
   
 
       <div className="animate">
+      <div className={s.requirements}>
       <select>
       <option value="volvo">freshman</option>
       <option value="saab">sophomore</option>
@@ -131,11 +145,12 @@ class Tables extends Component {
       </select>
         <div className="row">
           <div className="col-md-6">
-            <Panel
+            <Collapsible
+            trigger={<Panel
               header={<span>Pre-Requisites</span>}
-              bsStyle="primary" 
-              >
-              <Table>
+              bsStyle="primary"></Panel>}
+              classParentString = "" contentOuterClassName="panel-body">
+              <Table table-hover>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -150,15 +165,16 @@ class Tables extends Component {
               <Tabler data={Intellectual_Breadth}/>
               <Tabler data={General_electives}/>
               </Table>
-            </Panel>
+            </Collapsible>
           </div>
 
           <div className="col-md-6">
-            <Panel
-              header={<span>CSE Program Requirements</span>}
-              bsStyle="success" 
-              >
-              <Table>
+            <Collapsible
+            trigger={<Panel
+              header={<span>CSE Reqs</span>}
+              bsStyle="success"></Panel>}
+              classParentString = "" contentOuterClassName="panel-body">
+              <Table table-hover>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -174,9 +190,9 @@ class Tables extends Component {
               <Tabler data={compProf}/>
               <Tabler data={techCom497}/>
               </Table>
-            </Panel>
+            </Collapsible>
           </div>
-
+          </div>
         </div>
       </div>
       );

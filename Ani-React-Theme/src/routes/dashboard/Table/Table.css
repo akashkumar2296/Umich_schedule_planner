@@ -1,3 +1,9 @@
-.hidden {
-	display: none;
+.semester {
+	position: fixed;
+	bottom: 0px;
+	width: 75%;
+}
+
+.requirements {
+	margin-bottom: 240px;
 }
