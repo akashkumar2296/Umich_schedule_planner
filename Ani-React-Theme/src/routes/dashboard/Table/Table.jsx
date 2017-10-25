@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Panel, Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import s from './Table.css';
 
 const title = 'Table';
@@ -40,6 +41,25 @@ class Tables extends Component {
     setTitle: PropTypes.func.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: []
+    }
+    this.onDragEnd = this.onDragEnd.bind(this);
+  }
+
+  onDragEnd (result) {
+  // dropped outside the list
+    if(!result.destination) {
+       return;
+    }
+    this.setState({
+      items
+    });
+  }
+
+
   render() {
     return (
       <div className="animate">
@@ -52,7 +72,7 @@ class Tables extends Component {
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
-              <Table table-hove>
+              <Table>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -207,7 +227,7 @@ class Tables extends Component {
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
-              <Table table-hove>
+              <Table>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -365,7 +385,7 @@ class Tables extends Component {
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
-              <Table table-hover>
+              <Table>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -514,14 +534,14 @@ class Tables extends Component {
             </Collapsible>
           </div>
 
-<div className="col-md-6">
+        <div className="col-md-6">
           <Collapsible
             trigger={<Panel
               header={<span class="panel-title">Major Design Experience</span>}
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
-              <Table table-hover>
+              <Table>
               <thead>
                 <tr>
                   <th>Class</th>
@@ -672,7 +692,6 @@ class Tables extends Component {
         </div>
 
         </div>
-
 
         <div className={s.semester}>
         <div className="row">
@@ -683,9 +702,15 @@ class Tables extends Component {
             >
               <Table primary>
                 <tbody>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
+                  <Droppable droppableId="droppable">{(provided,snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'white' }}
+                    >
+                      <tr><td>&nbsp;{provided.placeholder}</td></tr>
+                    </div>
+                  )}
+                  </Droppable>
                   <tr>
                     <td>&nbsp;</td>
                   </tr>
