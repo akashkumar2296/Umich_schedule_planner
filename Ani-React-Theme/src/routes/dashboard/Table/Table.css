@@ -13,3 +13,8 @@
 	overflow: scroll;
 	background-color: white;
 }
+
+.classList {
+	height: 100%;
+	overflow-y: scroll;
+}

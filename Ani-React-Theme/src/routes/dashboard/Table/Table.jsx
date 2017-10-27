@@ -51,6 +51,7 @@ class Tables extends Component {
 
   onDragEnd (result) {
   // dropped outside the list
+    console.log("BOOTY")
     if(!result.destination) {
        return;
     }
@@ -58,6 +59,7 @@ class Tables extends Component {
       items
     });
   }
+
 
 
   render() {
@@ -223,7 +225,7 @@ class Tables extends Component {
           <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span class="panel-title">Program Core</span>}
+              header={<span class="panel-title">Humanities</span>}
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
@@ -705,24 +707,17 @@ class Tables extends Component {
                   <Droppable droppableId="droppable">{(provided,snapshot) => (
                     <div
                       ref={provided.innerRef}
-                      style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'white' }}
+                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
                     >
-                      <tr><td>&nbsp;{provided.placeholder}</td></tr>
+                      <tr><td id="w18"></td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
                     </div>
                   )}
                   </Droppable>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
                 </tbody>
               </Table>
             </Panel>
@@ -734,21 +729,20 @@ class Tables extends Component {
             >
               <Table primary>
                 <tbody>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
+                  <Droppable droppableId="droppable">{(provided,snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
+                    >
+                      <tr><td id="w18"></td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                    </div>
+                  )}
+                  </Droppable>
                 </tbody>
               </Table>
             </Panel>
@@ -760,21 +754,20 @@ class Tables extends Component {
             >
               <Table primary>
                 <tbody>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
+                  <Droppable droppableId="droppable">{(provided,snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
+                    >
+                      <tr><td id="w18"></td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                    </div>
+                  )}
+                  </Droppable>
                 </tbody>
               </Table>
             </Panel>
@@ -786,21 +779,20 @@ class Tables extends Component {
             >
               <Table primary>
                 <tbody>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
+                  <Droppable droppableId="droppable">{(provided,snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
+                    >
+                      <tr><td id="w18"></td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                      <tr><td>&nbsp;</td></tr>
+                    </div>
+                  )}
+                  </Droppable>
                 </tbody>
               </Table>
             </Panel>

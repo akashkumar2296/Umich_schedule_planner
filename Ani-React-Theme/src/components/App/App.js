@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
 import { IntlProvider, addLocaleData } from 'react-intl';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import $ from 'jquery';
 import s from './App.css';
 import style from '../../common/styles/bootstrap.scss';
@@ -14,6 +15,7 @@ import en from 'react-intl/locale-data/en';
 import hi from 'react-intl/locale-data/hi';
 import ur from 'react-intl/locale-data/ur';
 import de from 'react-intl/locale-data/de';
+import ReactDOM from 'react-dom';
 
 // import localForage from 'localforage';
 
@@ -25,6 +27,11 @@ const langMessage = {
   'de': dutchMessages,
   'ur': urduMessages,
 }
+
+const classes = [
+  {id: 'item-0', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Struct', credits:'4'},
+  {id: 'item-1', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Struct & Algor', credits:'4'}
+];
 
 
 class App extends Component {
@@ -56,6 +63,10 @@ class App extends Component {
       lang: 'en',
       message: englishMessages,
     };
+    this.state = {
+      items: classes
+    }
+    this.onDragEnd = this.onDragEnd.bind(this);
   }
 
   getChildContext() {
@@ -114,19 +125,36 @@ class App extends Component {
   componentWillUnmount() {
     this.removeCss();
   }
+  
+  onDragEnd (result) {
+    // dropped outside the list
+    console.log(result);
+    if(!result.destination) {
+       return;
+    }
+    console.log(result.source);
+    console.log(result.destination);
+    const element = (<tr><td>Prog & Data Struc    280</td></tr>)
+    ReactDOM.render(
+      element,
+      document.getElementById('w18')
+    );
+  }
 
 
   render() {
     // console.log('inside render', this.state);
     return (!this.props.error && this.props.header) ? (
             <IntlProvider locale={this.state.lang} messages={this.state.message}>
-              <div className={`dashboard-page ${s.dashboardPage}`}>
-                <Header />
-                <Sidebar />
-                <section id={s.bodyContainer} className={s.uiView}>
-                  {this.props.children}
+              <DragDropContext onDragEnd={this.onDragEnd}>
+                <div className={`dashboard-page ${s.dashboardPage}`}>
+                  <Header />
+                  <Sidebar />
+                  <section id={s.bodyContainer} className={s.uiView}>
+                    {this.props.children}
                 </section>
               </div>
+            </DragDropContext>
           </IntlProvider>
     ) :(
         this.props.children
