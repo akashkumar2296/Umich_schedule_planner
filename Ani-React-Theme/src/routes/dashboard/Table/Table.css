@@ -1,11 +1,24 @@
 .semester {
 	position: fixed;
     bottom: 0px;
-    width: 100%;
+    width: fit-content;
+    min-width: 80%;
     height: 245px;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: scroll;
-    padding-right: 420px;
+
+}
+
+.semester_tables {
+	min-height: 180px !important;
+}
+
+.semester_rows {
+	height: 30px !important;
+	padding: 8px !important;
+    line-height: 1.42857 !important;
+    vertical-align: top !important;
+    border-bottom: 1px solid #ddd !important;
 }
 
 .scroller {

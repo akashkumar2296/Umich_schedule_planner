@@ -36,43 +36,128 @@ const Intellectual_Breadth = [
 const General_electives = [
 {class: 'General Electives', satisfied: 'Yes', credits:'15'}];
 
+const panel_styles = ['danger', 'warning', 'success', 'info'];
+const all_semesters = ['Fall', 'Spring', 'Summer', 'Winter'];
+var year = 2017;
+var num_semesters = 4;
+
+
 class Tables extends Component {
   static contextTypes = {
     setTitle: PropTypes.func.isRequired,
   };
 
+  componentDidMount() {
+    this.createSemesters();
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      items: []
-    }
-    this.onDragEnd = this.onDragEnd.bind(this);
+      items: [{
+        semesters: '',
+        style: '',
+        year: ''
+      }]
+   }
+    this.createSemesters = this.createSemesters.bind(this);
+    this.getSemesters = this.getSemesters.bind(this);
   }
 
-  onDragEnd (result) {
-  // dropped outside the list
-    console.log("BOOTY")
-    if(!result.destination) {
-       return;
+  createSemesters() {
+    var semester_items = [];
+    var semester_id = 0;
+    for (var i = 0; i < num_semesters; i++) {
+      var semester_name = all_semesters[i%4] + ' ' + year
+      var panel_style = panel_styles[i%4];
+      if (!num_semesters%4) {
+        year++;
+      }
+      var id = 'droppable' + semester_id;
+      semester_id++;
+      semester_items.push({
+        semesters: semester_name,
+        style: panel_style,
+        year: year,
+        id: id
+      });
     }
-    this.setState({
-      items
-    });
+    console.log(semester_items);
+
+      this.setState({
+        items: semester_items
+      }, function () { //FOR DEBUGGING STATE
+            console.log(this.state.items);
+      });
   }
 
+  // loadEnrolled(semester_id) {
+  //   var semester_rows = [];
+  //   for(var i = 0; i < this.props.added_classes.length(); i++){
+  //     if(this.props.added_classes[i].semester_id === semester_id){
+  //       semester_rows.push(
+  //         <tr>
+  //           <td>{this.props.added_classes[i].course_name}</td>
+  //           <td>{this.props.added_classes[i].course_num}</td>
+  //           <td>{this.props.added_classes[i].credits}</td>
+  //         </tr>
+  //       );
+  //     }
+  //   }
+
+  //     return ({semester_rows});
+  // }
+
+  getSemesters() {
+    const semester_tables = this.state.items.map(sem =>
+      (
+        <div className="col-md-3">
+          <Panel
+            header={<span>{sem.semesters}</span>}
+            bsStyle={sem.style}
+          >
+            <Table primary>
+              <tbody>
+                <Droppable droppableId={sem.id}>{(provided,snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
+                  >
+                  <div className={s.semester_tables} id={sem.id}>
+                    {provided.placeholder}
+
+                  </div>
+                  </div>
+                )}
+                </Droppable>
+              </tbody>
+            </Table>
+          </Panel>
+        </div>
+      ),
+    );
+    return (
+      <div className="row">
+        {semester_tables}
+      </div>
+    );
+  }
 
 
   render() {
+    console.log("Table");
+    console.log(this.props);
+    console.log(this.state);
     return (
-      <div className="animate">
+      <div ref="root" className="animate">
       <div className={s.requirements}>
         <div className="row">
           <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span class="panel-title">Core Requirements</span>}
+              header={<span className="panel-title">Core Requirements</span>}
               bsStyle="primary"></Panel>}
-            classParentString = "" contentOuterClassName="panel-body" open="true"
+            classParentString = "" contentOuterClassName="panel-body" open={true}
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
               <Table>
               <thead>
@@ -225,7 +310,7 @@ class Tables extends Component {
           <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span class="panel-title">Humanities</span>}
+              header={<span className="panel-title">Humanities</span>}
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
@@ -383,7 +468,7 @@ class Tables extends Component {
           <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span class="panel-title">Technical Electives</span>}
+              header={<span className="panel-title">Technical Electives</span>}
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
@@ -539,7 +624,7 @@ class Tables extends Component {
         <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span class="panel-title">Major Design Experience</span>}
+              header={<span className="panel-title">Major Design Experience</span>}
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body" open="true"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
@@ -692,113 +777,12 @@ class Tables extends Component {
             </Collapsible>
           </div>
         </div>
-
         </div>
+
 
         <div className={s.semester}>
-        <div className="row">
-          <div className="col-md-3">
-            <Panel
-              header={<span>Winter 2018</span>}
-              bsStyle="danger"
-            >
-              <Table primary>
-                <tbody>
-                  <Droppable droppableId="droppable">{(provided,snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
-                    >
-                      <tr><td id="w18"></td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                    </div>
-                  )}
-                  </Droppable>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-          <div className="col-md-3">
-            <Panel
-              header={<span>Fall 2018</span>}
-              bsStyle="warning"
-            >
-              <Table primary>
-                <tbody>
-                  <Droppable droppableId="droppable">{(provided,snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
-                    >
-                      <tr><td id="w18"></td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                    </div>
-                  )}
-                  </Droppable>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-          <div className="col-md-3">
-            <Panel
-              header={<span>Winter 2019</span>}
-              bsStyle="success"
-            >
-              <Table primary>
-                <tbody>
-                  <Droppable droppableId="droppable">{(provided,snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
-                    >
-                      <tr><td id="w18"></td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                    </div>
-                  )}
-                  </Droppable>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
-          <div className="col-md-3">
-            <Panel
-              header={<span>Fall 2019</span>}
-              bsStyle="info"
-            >
-              <Table primary>
-                <tbody>
-                  <Droppable droppableId="droppable">{(provided,snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      style={{ backgroundColor: snapshot.isDraggingOver ? 'lightgrey' : 'white' }}
-                    >
-                      <tr><td id="w18"></td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                      <tr><td>&nbsp;</td></tr>
-                    </div>
-                  )}
-                  </Droppable>
-                </tbody>
-              </Table>
-            </Panel>
-          </div>
+          {this.getSemesters()}
         </div>
-      </div>
       </div>
     );
   }

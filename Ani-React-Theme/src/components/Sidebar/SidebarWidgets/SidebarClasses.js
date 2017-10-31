@@ -104,39 +104,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 //   { name: 'credits', displayName: "Credits"}
 // ];
 
-const classes = [
-  {id: 'item-0', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Struct', credits:'4'},
-  {id: 'item-1', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Struct & Algor', credits:'4'},
-  {id: 'item-2', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: '4'},
-  {id: 'item-3', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: '4'},
-  {id: 'item-4', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: '4'},
-  {id: 'item-5', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: '4'},
-  {id: 'item-6', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: '4'},
-  {id: 'item-7', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: '4'},
-  {id: 'item-8', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: '4'},
-  {id: 'item-9', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: '4'},
-  {id: 'item-12', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: '4'},
-  {id: 'item-13', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: '4'},
-  {id: 'item-14', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: '4'},
-  {id: 'item-15', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: '4'},
-  {id: 'item-16', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: '4'},
-  {id: 'item-17', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: '4'},
-  {id: 'item-18', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: '4'},
-  {id: 'item-19', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: '4'},
-  {id: 'item-20', academic_group: 'Engineering', subject: 'EECS', course_num: '330', course_name: '', credits: '4'},
-  {id: 'item-21', academic_group: 'Engineering', subject: 'EECS', course_num: '334', course_name: '', credits: '4'},
-  {id: 'item-22', academic_group: 'Engineering', subject: 'EECS', course_num: '351', course_name: '', credits: '4'},
-  {id: 'item-23', academic_group: 'Engineering', subject: 'EECS', course_num: '370', course_name: '', credits: '4'},
-  {id: 'item-24', academic_group: 'Engineering', subject: 'EECS', course_num: '373', course_name: '', credits: '4'},
-  {id: 'item-18', academic_group: 'Engineering', subject: 'EECS', course_num: '376', course_name: '', credits: '4'},
-  {id: 'item-19', academic_group: 'Engineering', subject: 'EECS', course_num: '381', course_name: '', credits: '4'},
-  {id: 'item-20', academic_group: 'Engineering', subject: 'EECS', course_num: '382', course_name: '', credits: '4'},
-  {id: 'item-21', academic_group: 'Engineering', subject: 'EECS', course_num: '388', course_name: '', credits: '4'},
-  {id: 'item-22', academic_group: 'Engineering', subject: 'EECS', course_num: '398', course_name: '', credits: '4'},
-  {id: 'item-23', academic_group: 'Engineering', subject: 'EECS', course_num: '399', course_name: '', credits: '4'},
-  {id: 'item-24', academic_group: 'Engineering', subject: 'EECS', course_num: '402', course_name: '', credits: '4'}
-];
-
 
 // // fake data generator
 // const getItems = (count) => Array.from({length: count}, (v, k) => k).map(k => ({
@@ -170,22 +137,8 @@ const getListStyle = (isDraggingOver) => ({
 class FilterableClassesTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      items: classes
-    }
-    this.onDragEnd = this.onDragEnd.bind(this);
   }
-  
-  onDragEnd (result) {
-    // dropped outside the list
-    if(!result.destination) {
-       return; 
-    }
-    
-    this.setState({
-      items
-    });
-  }
+
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
@@ -197,7 +150,7 @@ class FilterableClassesTable extends Component {
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {this.state.items.map(item => (
+              {this.props.search_classes.map(item => (
                 <Draggable
                   key={item.id}
                   draggableId={item.id}
@@ -214,7 +167,7 @@ class FilterableClassesTable extends Component {
                       >
                         <div className="row">
                           <div className="col-xs-6">
-                            {item.subject}
+                            {item.course_name}
                           </div>
                           <div className="col-xs-3">
                             {item.course_num}

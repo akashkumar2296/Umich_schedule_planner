@@ -7,6 +7,8 @@ import s from './App.css';
 import style from '../../common/styles/bootstrap.scss';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
+import Table from '../../routes/dashboard/Table';
+import appendReactDOM from 'append-react-dom';
 import dutchMessages from '../../../languages/de.json';
 import englishMessages from '../../../languages/en.json';
 import hindiMessages from '../../../languages/hn.json';
@@ -29,8 +31,24 @@ const langMessage = {
 }
 
 const classes = [
-  {id: 'item-0', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Struct', credits:'4'},
-  {id: 'item-1', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Struct & Algor', credits:'4'}
+  {id: 'item-0', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Structures', credits: 4},
+  {id: 'item-1', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Structures & Algorithms', credits: 4}
+  // {id: 'item-2', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: '4'},
+  // {id: 'item-3', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: '4'},
+  // {id: 'item-4', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: '4'},
+  // {id: 'item-5', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: '4'},
+  // {id: 'item-6', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: '4'},
+  // {id: 'item-7', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: '4'},
+  // {id: 'item-8', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: '4'},
+  // {id: 'item-9', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: '4'},
+  // {id: 'item-12', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: '4'},
+  // {id: 'item-13', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: '4'},
+  // {id: 'item-14', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: '4'},
+  // {id: 'item-15', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: '4'},
+  // {id: 'item-16', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: '4'},
+  // {id: 'item-17', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: '4'},
+  // {id: 'item-18', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: '4'},
+  // {id: 'item-19', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: '4'},
 ];
 
 
@@ -62,11 +80,28 @@ class App extends Component {
     this.state = {
       lang: 'en',
       message: englishMessages,
+      search_classes: [{
+        id: '',
+        academic_group: '',
+        subject: '',
+        course_num: '',
+        course_name: '',
+        credits: ''
+      }],
+      added_classes: [],
+      credits_completed: 0,
+      credits_required: 128
     };
-    this.state = {
-      items: classes
-    }
     this.onDragEnd = this.onDragEnd.bind(this);
+    this.updateView = this.updateView.bind(this);
+    this.updateCredits = this.updateCredits.bind(this);
+  }
+
+  updateCredits(course_credits){
+    course_credits += this.state.credits_completed;
+    this.setState({
+      credits_completed: course_credits
+    });
   }
 
   getChildContext() {
@@ -111,6 +146,9 @@ class App extends Component {
     this.setState({
       lang: setLang,
       message: langMessage[setLang],
+      search_classes: classes,
+      credits_completed: 0,
+      credits_required: 128
     });
   }
 
@@ -125,20 +163,26 @@ class App extends Component {
   componentWillUnmount() {
     this.removeCss();
   }
-  
+
+  updateView (semester_id, course_id){
+    const course = this.state.search_classes[course_id];
+    course.semester_id = semester_id;
+    this.setState({
+      added_classes: this.state.added_classes.concat(course)
+    });
+  }
+
   onDragEnd (result) {
     // dropped outside the list
+    console.log('result');
     console.log(result);
     if(!result.destination) {
        return;
     }
-    console.log(result.source);
-    console.log(result.destination);
-    const element = (<tr><td>Prog & Data Struc    280</td></tr>)
-    ReactDOM.render(
-      element,
-      document.getElementById('w18')
-    );
+    else{
+      this.setState({ credits_completed: this.state.credits_completed + this.state.search_classes[result.source.index].credits })
+      this.updateView(result.destination.droppableId, result.source.index);
+    }
   }
 
 
@@ -148,8 +192,9 @@ class App extends Component {
             <IntlProvider locale={this.state.lang} messages={this.state.message}>
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className={`dashboard-page ${s.dashboardPage}`}>
-                  <Header />
-                  <Sidebar />
+                  <Header updateCredits={this.updateCredits} credits_completed={this.state.credits_completed}
+                    credits_required={this.state.credits_required} />
+                  <Sidebar updateView={this.onDragEnd} search_classes={this.state.search_classes}/>
                   <section id={s.bodyContainer} className={s.uiView}>
                     {this.props.children}
                 </section>
@@ -160,7 +205,6 @@ class App extends Component {
         this.props.children
     );
   }
-
 }
 
 // export default withStyles(s)(App);

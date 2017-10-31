@@ -6,13 +6,17 @@ import SidebarWidgets from './SidebarWidgets';
 import MenuBar from './MenuBar/MenuBar';
 
 class Sidebar extends Component {
+  constructor(props){
+    super(props);
+  }
+
 
   render() {
     return (
       <aside className={s.sidebar}>
         <div className={'sidenav-outer ' + s.sidenavOuter}>
           <MenuBar />
-          <SidebarWidgets />
+          <SidebarWidgets updateView={this.props.updateView} search_classes={this.props.search_classes}/>
         </div>
       </aside>
     );

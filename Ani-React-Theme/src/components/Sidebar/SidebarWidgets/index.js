@@ -6,12 +6,15 @@ import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
 
 class SidebarWidgets extends Component { // eslint-disable-line
+  constructor(props){
+    super(props);
+  }
 
   render() {
     return (
       <div className={`sideWidgets ${s.sideWidgets}`}>
         <div className={`widgets-content ${s.widgetsContent}`}>
-          <FilterableClassesTable />
+          <FilterableClassesTable updateView={this.props.updateView} search_classes={this.props.search_classes} />
         </div>
       </div>
     );
