@@ -4,6 +4,7 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import $ from 'jquery';
 import s from './App.css';
+import s2 from '../../routes/dashboard/Table/Table.css'
 import style from '../../common/styles/bootstrap.scss';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -31,26 +32,54 @@ const langMessage = {
 }
 
 const classes = [
-  {id: 'item-0', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Structures', credits: 4},
-  {id: 'item-1', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Structures & Algorithms', credits: 4}
-  // {id: 'item-2', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: '4'},
-  // {id: 'item-3', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: '4'},
-  // {id: 'item-4', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: '4'},
-  // {id: 'item-5', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: '4'},
-  // {id: 'item-6', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: '4'},
-  // {id: 'item-7', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: '4'},
-  // {id: 'item-8', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: '4'},
-  // {id: 'item-9', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: '4'},
-  // {id: 'item-12', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: '4'},
-  // {id: 'item-13', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: '4'},
-  // {id: 'item-14', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: '4'},
-  // {id: 'item-15', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: '4'},
-  // {id: 'item-16', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: '4'},
-  // {id: 'item-17', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: '4'},
-  // {id: 'item-18', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: '4'},
-  // {id: 'item-19', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: '4'},
+  {id: '0', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Structures', credits: 4},
+  {id: '1', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Structures & Algorithms', credits: 4},
+  {id: '2', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: 4},
+  {id: '3', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: 4},
+  {id: '4', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: 4},
+  {id: '5', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: 4},
+  {id: '6', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: 4},
+  {id: '7', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: 4},
+  {id: '8', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: 4},
+  {id: '9', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: 4},
+  {id: '12', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: 4},
+  {id: '13', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: 4},
+  {id: '14', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: 4},
+  {id: '15', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: 4},
+  {id: '16', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: 4},
+  {id: '17', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: 4},
+  {id: '18', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: 4},
+  {id: '19', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: 4}
 ];
 
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  result.splice(startIndex, 1);
+  // const [removed] = result.splice(startIndex, 1);
+
+  return result;
+};
+
+const grid = 5;
+
+const getItemStyle = (draggableStyle, isDragging) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: 'none',
+  padding: grid * 2,
+  margin: `0 0 1px 0`,
+  
+  // change background colour if dragging
+  background: isDragging ? 'white' : 'white',
+  
+  // styles we need to apply on draggables
+  ...draggableStyle
+});
+
+const getListStyle = (isDraggingOver) => ({
+  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  padding: 0,
+  width: '100%'
+});
 
 class App extends Component {
 
@@ -69,7 +98,7 @@ class App extends Component {
     insertCss: PropTypes.func.isRequired,
     setTitle: PropTypes.func.isRequired,
     setMeta: PropTypes.func.isRequired,
-    setLang: PropTypes.func,
+    setLang: PropTypes.func
   };
 
   constructor(props) {
@@ -88,14 +117,18 @@ class App extends Component {
         course_name: '',
         credits: ''
       }],
-      added_classes: [],
+      added_classes: [{}],
       credits_completed: 0,
       credits_required: 128
     };
     this.onDragEnd = this.onDragEnd.bind(this);
     this.updateView = this.updateView.bind(this);
     this.updateCredits = this.updateCredits.bind(this);
+    this.get_added_classes = this.get_added_classes.bind(this);
+    this.remove_course = this.remove_course.bind(this);
   }
+
+
 
   updateCredits(course_credits){
     course_credits += this.state.credits_completed;
@@ -172,32 +205,80 @@ class App extends Component {
     });
   }
 
+  remove_course(course) {
+    const newState = this.state.added_classes;
+    const search_class = newState.splice(newState.indexOf(course), 1);
+    this.setState({
+      search_classes: this.state.search_classes.concat(search_class),
+      added_classes: newState
+    });
+
+    this.updateCredits(-course.credits);
+
+    var id = course.semester_id;
+    const element = (<div className="row"> {this.get_added_classes(id)} </div>);
+    ReactDOM.render(
+        element,
+        document.getElementById(id)
+     );
+    console.log("Removed");
+  }
+
+  get_added_classes(id){
+    const classes = this.state.added_classes.reduce((acc, course) => {
+      if (id == course.semester_id){
+        acc.push(<div className={s2.semester_rows}> {course.course_name}
+          <div className={s2.remove_course}> <a href="#" onClick={this.remove_course.bind(this, course)} aria-label="Remove class">&times;</a></div> </div>);
+      }
+      return acc;
+    }, []);
+    return classes;
+  }
+
   onDragEnd (result) {
     // dropped outside the list
-    console.log('result');
     console.log(result);
-    if(!result.destination) {
+    if(!result.destination || result.destination.droppableId === 'courses') {
        return;
     }
     else{
       this.setState({ credits_completed: this.state.credits_completed + this.state.search_classes[result.source.index].credits })
       this.updateView(result.destination.droppableId, result.source.index);
+
+      var id = result.destination.droppableId;
+      const element = (<div className="row"> {this.get_added_classes(id)} </div>);
+
+      const search_classes = reorder(
+        this.state.search_classes,
+        result.source.index,
+        result.destination.index
+      );
+
+      this.setState({
+        search_classes: search_classes
+      });
+      ReactDOM.render(
+        element,
+        document.getElementById(id)
+     );
     }
   }
 
 
   render() {
     // console.log('inside render', this.state);
+    console.log('Children');
+    console.log(this.props.children);
     return (!this.props.error && this.props.header) ? (
             <IntlProvider locale={this.state.lang} messages={this.state.message}>
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className={`dashboard-page ${s.dashboardPage}`}>
                   <Header updateCredits={this.updateCredits} credits_completed={this.state.credits_completed}
                     credits_required={this.state.credits_required} />
-                  <Sidebar updateView={this.onDragEnd} search_classes={this.state.search_classes}/>
+                  <Sidebar onDragEnd={this.onDragEnd} search_classes={this.state.search_classes}/>
                   <section id={s.bodyContainer} className={s.uiView}>
                     {this.props.children}
-                </section>
+                  </section>
               </div>
             </DragDropContext>
           </IntlProvider>

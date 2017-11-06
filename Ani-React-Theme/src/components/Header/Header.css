@@ -58,15 +58,25 @@
   margin: 0;
 }
 
+.navbarFilter {
+  float: right !important;
+  padding-top: 20px;
+}
+
 .topNavbar {
   background: none;
   border-radius: 0;
   border: none;
+  max-height: 450px !important;
+  overflow: hidden;
 
   & .navbarHeader {
     width: var(--nav-width);
     background: white;
     margin-right: 10px;
+    & .navbarFilter {
+      float: right !important;
+    }
     & .navbarBrand {
       display: block;
       color: #d6ebf8;
@@ -273,6 +283,7 @@
     direction: rtl;
   }
   & .navbarHeader {
+    overflow: hidden;
     float: right;
     background: white;
   }

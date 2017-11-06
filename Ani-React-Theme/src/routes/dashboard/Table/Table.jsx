@@ -44,7 +44,7 @@ var num_semesters = 4;
 
 class Tables extends Component {
   static contextTypes = {
-    setTitle: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -82,7 +82,6 @@ class Tables extends Component {
         id: id
       });
     }
-    console.log(semester_items);
 
       this.setState({
         items: semester_items
@@ -145,9 +144,6 @@ class Tables extends Component {
 
 
   render() {
-    console.log("Table");
-    console.log(this.props);
-    console.log(this.state);
     return (
       <div ref="root" className="animate">
       <div className={s.requirements}>

@@ -14,7 +14,7 @@ class SidebarWidgets extends Component { // eslint-disable-line
     return (
       <div className={`sideWidgets ${s.sideWidgets}`}>
         <div className={`widgets-content ${s.widgetsContent}`}>
-          <FilterableClassesTable updateView={this.props.updateView} search_classes={this.props.search_classes} />
+          <FilterableClassesTable search_classes={this.props.search_classes} />
         </div>
       </div>
     );

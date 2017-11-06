@@ -38,33 +38,34 @@ export default [{
   // keep in mind, routes are evaluated in order
   children: [
     home,
-    typography,
-    grid,
+    // typography,
+    // grid,
     table,
     formComponents,
     formElements,
-    buttons,
-    dropdowns,
-    icons,
+    // buttons,
+    // dropdowns,
+    // icons,
     panels,
-    alerts,
-    progressbars,
-    paginations,
-    otherElements,
-    chartjs,
-    morris,
-    inbox,
-    compose,
-    blank,
-    profile,
-    invoice,
-    calendar,
+    // alerts,
+    progressbars
+    // paginations,
+    // otherElements,
+    // chartjs,
+    // morris,
+    // inbox,
+    // compose,
+    // blank,
+    // profile,
+    // invoice,
+    // calendar,
 
   ],
 
   async action({ next, render, context }) {
     const component = await next();
     if (component === undefined || component === true) return component;
+    console.log("component:", component);
     return render(
       <App context={context} header={true}>{component}</App> // eslint-disable-line
     );

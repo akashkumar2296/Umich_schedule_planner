@@ -2,7 +2,7 @@
 	position: fixed;
     bottom: 0px;
     width: fit-content;
-    min-width: 80%;
+    min-width: 74%;
     height: 245px;
     overflow-x: scroll;
     overflow-y: scroll;
@@ -10,15 +10,21 @@
 }
 
 .semester_tables {
-	min-height: 180px !important;
+	height: 180px !important;
 }
 
 .semester_rows {
-	height: 30px !important;
+	min-height: 35px !important;
 	padding: 8px !important;
     line-height: 1.42857 !important;
     vertical-align: top !important;
-    border-bottom: 1px solid #ddd !important;
+    border-bottom-style: solid !important;
+    border-bottom-width: 1px !important;
+    border-color: #ddd;
+}
+
+.remove_course {
+	float: right;
 }
 
 .scroller {

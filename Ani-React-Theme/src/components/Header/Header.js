@@ -9,6 +9,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import Dropdown from 'react-dropdown'
 import { FormattedMessage } from 'react-intl';
 import { Panel, ProgressBar, Button } from 'react-bootstrap';
 // import localForage from 'localforage';
@@ -25,6 +26,10 @@ import history from '../../core/history';
 // import Translate from '../common/Translate';
 import $ from 'jquery';
 
+const options = [
+  'Core Requirements', 'Humanities', 'Technical Electives', 'Major Design Experience'
+]
+const defaultOption = options[0]
 
 class TopNav extends Component{
   static contextTypes = {
@@ -55,8 +60,7 @@ class TopNav extends Component{
   // }
 
   render() {
-    console.log('completed');
-    console.log(this.props.credits_completed);
+
     return (
       <nav className={"navbar navbar-fixed-top " + s.topNavbar} role="navigation">
         <div className={"navbar-header text-center " + s.navbarHeader}>
