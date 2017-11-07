@@ -1,0 +1,12 @@
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+# production
+build
+
+database.sqlite
+ncp-debug.log
+npm-debug.log
+node_modules/
+npm-debug.log.2324334468
+src/routes/dashboard/Table/Semesters.jsx
+src/components/Sidebar/SidebarWidgets/Drag.js
