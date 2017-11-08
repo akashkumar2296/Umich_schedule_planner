@@ -53,6 +53,27 @@ const classes = [
   {id: '19', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: 4}
 ];
 
+const pieData = [
+  {
+    value: 300,
+    color: '#F7464A',
+    highlight: '#FF5A5E',
+    label: 'Red',
+  },
+  {
+    value: 50,
+    color: '#46BFBD',
+    highlight: '#5AD3D1',
+    label: 'Green',
+  },
+  {
+    value: 100,
+    color: '#FDB45C',
+    highlight: '#FFC870',
+    label: 'Yellow',
+  },
+];
+
 const colorGenerator = ['#de6764', '#5bc0de', '#5cb85c', '#f0ad4e']
 
 const reorder = (list, startIndex, endIndex) => {
@@ -123,13 +144,9 @@ class App extends Component {
       added_classes: [{}],
       credits_completed: 0,
       credits_required: 128,
-      semester_stats: [{
-        value: 0,
-        color: '',
-        highlight: '',
-        label: ''
-      }]
     };
+
+
     this.onDragEnd = this.onDragEnd.bind(this);
     this.updateView = this.updateView.bind(this);
     this.updateCredits = this.updateCredits.bind(this);

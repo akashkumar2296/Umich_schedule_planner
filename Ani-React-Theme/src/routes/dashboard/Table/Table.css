@@ -1,7 +1,7 @@
 .semester {
 	position: fixed;
     bottom: 0px;
-    width: inherit !important;
+    width: 70% !important;
     height: 25%;
     overflow-x: scroll;
     overflow-y: scroll;
@@ -27,7 +27,7 @@
 }
 
 .scroller {
-	max-height: 220px;
+	max-height: 219px;
 	overflow: scroll;
 	background-color: white;
 }
