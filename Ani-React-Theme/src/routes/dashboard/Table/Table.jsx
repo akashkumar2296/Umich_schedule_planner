@@ -76,6 +76,35 @@ const donutOptions = {
 
 };
 
+const pieData = [
+  {
+    value: 4,
+    color: '#de6764',
+    highlight: 'grey',
+    label: 'Fall 2017'
+  },
+  {
+    value: 4,
+    color: '#5bc0de',
+    highlight: 'grey',
+    label: 'Winter 2018'
+  },
+  {
+    value: 4,
+    color: '#5cb85c',
+    highlight: 'grey',
+    label: 'Spring 2018'
+  },
+  {
+    value: 4,
+    color: '#f0ad4e',
+    highlight: 'grey',
+    label: 'Summer 2018'
+  }
+];
+
+const colorGenerator = ['#de6764', '#5bc0de', '#5cb85c', '#f0ad4e']
+
 class Tables extends Component {
   static contextTypes = {
     setTitle: PropTypes.func.isRequired
@@ -100,7 +129,7 @@ class Tables extends Component {
 
   createSemesters() {
     var semester_items = [];
-    var pie = [];
+    var pieData = [];
     var semester_id = 0;
     for (var i = 0; i < num_semesters; i++) {
       if (!((i+1)%4)) {
@@ -116,8 +145,16 @@ class Tables extends Component {
         year: year,
         id: id,
       });
+      // pieData.push({
+      //   value: 0,
+      //   color: colorGenerator[i],
+      //   highlight: 'grey',
+      //   label: semester_name
+      // });
     }
-
+    // localStorage.setItem("piedata", pieData);
+    // console.log("piedata", localStorage.getItem("piedata")[0]);
+    // console.log(pieData);
       this.setState({
         items: semester_items,
       }, function () { //FOR DEBUGGING STATE
@@ -177,7 +214,6 @@ class Tables extends Component {
     );
   }
 
-
   render() {
     return (
       <div ref="root" className="animate">
@@ -188,7 +224,7 @@ class Tables extends Component {
             trigger={<Panel
               header={<span className="panel-title">Core Requirements</span>}
               bsStyle="primary"></Panel>}
-            classParentString = "" contentOuterClassName="panel-body" open={true}
+            classParentString = "" contentOuterClassName="panel-body"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
               <Table>
               <thead>
@@ -343,7 +379,7 @@ class Tables extends Component {
             trigger={<Panel
               header={<span className="panel-title">Humanities</span>}
               bsStyle="primary"></Panel>}
-            classParentString = "" contentOuterClassName="panel-body" open="true"
+            classParentString = "" contentOuterClassName="panel-body"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
               <Table>
               <thead>
@@ -501,7 +537,7 @@ class Tables extends Component {
             trigger={<Panel
               header={<span className="panel-title">Technical Electives</span>}
               bsStyle="primary"></Panel>}
-            classParentString = "" contentOuterClassName="panel-body" open="true"
+            classParentString = "" contentOuterClassName="panel-body"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
               <Table>
               <thead>
@@ -657,7 +693,7 @@ class Tables extends Component {
             trigger={<Panel
               header={<span className="panel-title">Major Design Experience</span>}
               bsStyle="primary"></Panel>}
-            classParentString = "" contentOuterClassName="panel-body" open="true"
+            classParentString = "" contentOuterClassName="panel-body"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
               <Table>
               <thead>
@@ -808,8 +844,8 @@ class Tables extends Component {
             </Collapsible>
           </div>
         </div>
+        <Doughnut data={pieData} options={donutOptions} />
         </div>
-
         <div className={s.semester}>
           {this.getSemesters()}
         </div>
