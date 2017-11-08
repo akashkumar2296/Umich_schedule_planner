@@ -1,0 +1,30 @@
+{
+  "name": "classscheduleapi",
+  "version": "1.0.0",
+  "description": "\"REST API for classes\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akashkumar2296/Umich_schedule_planner.git"
+  },
+  "keywords": [
+    "RESTful"
+  ],
+  "author": "Akash Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akashkumar2296/Umich_schedule_planner/issues"
+  },
+  "homepage": "https://github.com/akashkumar2296/Umich_schedule_planner#readme",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.12.4"
+  }
+}
