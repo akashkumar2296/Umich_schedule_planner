@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Panel, Table } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Line, Bar, Pie, Doughnut } from 'react-chartjs';
 import s from './Table.css';
 
 const title = 'Table';
@@ -36,11 +37,44 @@ const Intellectual_Breadth = [
 const General_electives = [
 {class: 'General Electives', satisfied: 'Yes', credits:'15'}];
 
-const panel_styles = ['danger', 'warning', 'success', 'info'];
-const all_semesters = ['Fall', 'Spring', 'Summer', 'Winter'];
+const panel_styles = ['danger', 'info', 'success', 'warning'];
+const all_semesters = ['Fall', 'Winter', 'Spring', 'Summer'];
 var year = 2017;
 var num_semesters = 4;
 
+const donutOptions = {
+    // Boolean - Whether we should show a stroke on each segment
+  segmentShowStroke: true,
+
+    // String - The colour of each segment stroke
+  segmentStrokeColor: '#fff',
+
+    // Number - The width of each segment stroke
+  segmentStrokeWidth: 2,
+
+    // Number - The percentage of the chart that we cut out of the middle
+  percentageInnerCutout: 50, // This is 0 for Pie charts
+
+    // Number - Amount of animation steps
+  animationSteps: 100,
+
+    // String - Animation easing effect
+  animationEasing: 'easeOutBounce',
+
+    // Boolean - Whether we animate the rotation of the Doughnut
+  animateRotate: true,
+
+    // Boolean - Whether we animate scaling the Doughnut from the centre
+  animateScale: false,
+  responsive: true,
+
+    // String - A legend template
+  legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% '
+  + 'for (const i=0; i<segments.length; i++){%><li><span style='
+  + '"background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%>'
+  + '<%=segments[i].label%><%}%></li><%}%></ul>',
+
+};
 
 class Tables extends Component {
   static contextTypes = {
@@ -57,8 +91,8 @@ class Tables extends Component {
       items: [{
         semesters: '',
         style: '',
-        year: ''
-      }]
+        year: '',
+      }],
    }
     this.createSemesters = this.createSemesters.bind(this);
     this.getSemesters = this.getSemesters.bind(this);
@@ -66,25 +100,26 @@ class Tables extends Component {
 
   createSemesters() {
     var semester_items = [];
+    var pie = [];
     var semester_id = 0;
     for (var i = 0; i < num_semesters; i++) {
-      var semester_name = all_semesters[i%4] + ' ' + year
-      var panel_style = panel_styles[i%4];
-      if (!num_semesters%4) {
+      if (!((i+1)%4)) {
         year++;
       }
+      var semester_name = all_semesters[i%4] + ' ' + year
+      var panel_style = panel_styles[i%4];
       var id = 'droppable' + semester_id;
       semester_id++;
       semester_items.push({
         semesters: semester_name,
         style: panel_style,
         year: year,
-        id: id
+        id: id,
       });
     }
 
       this.setState({
-        items: semester_items
+        items: semester_items,
       }, function () { //FOR DEBUGGING STATE
             console.log(this.state.items);
       });
@@ -774,7 +809,6 @@ class Tables extends Component {
           </div>
         </div>
         </div>
-
 
         <div className={s.semester}>
           {this.getSemesters()}

@@ -22,6 +22,7 @@ import ReactDOM from 'react-dom';
 
 // import localForage from 'localforage';
 
+
 addLocaleData([...en, ...hi, ...ur, ...de]);
 
 const langMessage = {
@@ -51,6 +52,8 @@ const classes = [
   {id: '18', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: 4},
   {id: '19', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: 4}
 ];
+
+const colorGenerator = ['#de6764', '#5bc0de', '#5cb85c', '#f0ad4e']
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -119,7 +122,13 @@ class App extends Component {
       }],
       added_classes: [{}],
       credits_completed: 0,
-      credits_required: 128
+      credits_required: 128,
+      semester_stats: [{
+        value: 0,
+        color: '',
+        highlight: '',
+        label: ''
+      }]
     };
     this.onDragEnd = this.onDragEnd.bind(this);
     this.updateView = this.updateView.bind(this);
@@ -205,11 +214,14 @@ class App extends Component {
     });
   }
 
-  remove_course(course) {
+  remove_course(course, index) {
     const newState = this.state.added_classes;
-    const search_class = newState.splice(newState.indexOf(course), 1);
+    const search_classes = this.state.search_classes;
+    newState.splice(newState.indexOf(course), 1);
+    search_classes.splice(index, 0, course);
+    console.log(search_classes);
     this.setState({
-      search_classes: this.state.search_classes.concat(search_class),
+      search_classes: search_classes,
       added_classes: newState
     });
 
@@ -224,11 +236,11 @@ class App extends Component {
     console.log("Removed");
   }
 
-  get_added_classes(id){
+  get_added_classes(id, index){
     const classes = this.state.added_classes.reduce((acc, course) => {
       if (id == course.semester_id){
         acc.push(<div className={s2.semester_rows}> {course.course_name}
-          <div className={s2.remove_course}> <a href="#" onClick={this.remove_course.bind(this, course)} aria-label="Remove class">&times;</a></div> </div>);
+          <div className={s2.remove_course}> <a href="#" onClick={this.remove_course.bind(this, course, index)} aria-label="Remove class">&times;</a></div> </div>);
       }
       return acc;
     }, []);
@@ -246,7 +258,7 @@ class App extends Component {
       this.updateView(result.destination.droppableId, result.source.index);
 
       var id = result.destination.droppableId;
-      const element = (<div className="row"> {this.get_added_classes(id)} </div>);
+      const element = (<div className="row"> {this.get_added_classes(id, result.source.index)} </div>);
 
       const search_classes = reorder(
         this.state.search_classes,

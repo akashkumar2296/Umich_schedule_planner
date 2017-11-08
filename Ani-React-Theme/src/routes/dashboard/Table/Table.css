@@ -1,9 +1,8 @@
 .semester {
 	position: fixed;
     bottom: 0px;
-    width: fit-content;
-    min-width: 74%;
-    height: 245px;
+    width: inherit !important;
+    height: 25%;
     overflow-x: scroll;
     overflow-y: scroll;
 

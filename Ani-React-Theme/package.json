@@ -53,6 +53,7 @@
     "react-beautiful-dnd": "^2.4.1",
     "react-bootstrap": "^0.30.0",
     "react-chartjs": "^0.8.0",
+    "react-collapsible": "^2.0.3",
     "react-cookie": "^0.4.8",
     "react-datepicker": "^0.34.0",
     "react-dnd": "^2.5.4",
