@@ -261,7 +261,10 @@ class App extends Component {
     const newState = this.state.added_classes;
     const search_classes = this.state.search_classes;
     var credits_by_semester = this.state.credits_by_semester;
+
+    console.log("BEFORE", credits_by_semester[index]);
     credits_by_semester[index] -= course.credits;
+    console.log("AFTER", credits_by_semester[index]);
     newState.splice(newState.indexOf(course), 1);
     search_classes.splice(index, 0, course);
     console.log(search_classes);
@@ -318,6 +321,14 @@ class App extends Component {
   onDragEnd (result) {
     // Dropped into the semester tables
     console.log(result);
+    var index = result.destination.droppableId.replace( /^\D+/g, '');
+    var credits_by_semester = this.state.credits_by_semester;
+    credits_by_semester[index] += this.state.search_classes[result.source.index].credits;
+
+    console.log("credits_by_semester", credits_by_semester[index])
+    if(credits_by_semester[index] > 18){
+      return;
+    }
     if(!result.destination || result.destination.droppableId === 'courses') {
        return;
     }
@@ -325,7 +336,6 @@ class App extends Component {
       this.setState({ credits_completed: this.state.credits_completed + this.state.search_classes[result.source.index].credits })
       this.updateView(result.destination.droppableId, result.source.index);
 
-      var index = result.destination.droppableId.replace( /^\D+/g, '');
       console.log("index", index);
       var id = result.destination.droppableId;
 
@@ -336,13 +346,6 @@ class App extends Component {
         result.source.index,
         result.destination.index
       );
-
-      var credits_by_semester = this.state.credits_by_semester;
-      credits_by_semester[index] += this.state.search_classes[result.source.index].credits;
-
-      if(credits_by_semester[index] > 18){
-        return;
-      }
 
       const element = (<div className="row"> {this.get_added_classes(id, result.source.index)} </div>);
       this.get_heat_bar(id);
