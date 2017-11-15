@@ -1,11 +1,8 @@
 .semester {
-	position: fixed;
     bottom: 0px;
-    width: 70% !important;
     height: 25%;
     overflow-x: scroll;
     overflow-y: scroll;
-
 }
 
 .semester_tables {
@@ -27,7 +24,7 @@
 }
 
 .scroller {
-	max-height: 219px;
+	max-height: 220px;
 	overflow: scroll;
 	background-color: white;
 }

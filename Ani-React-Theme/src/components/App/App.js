@@ -19,6 +19,7 @@ import hi from 'react-intl/locale-data/hi';
 import ur from 'react-intl/locale-data/ur';
 import de from 'react-intl/locale-data/de';
 import ReactDOM from 'react-dom';
+import { Panel, ProgressBar, Button } from 'react-bootstrap';
 
 // import localForage from 'localforage';
 
@@ -33,25 +34,52 @@ const langMessage = {
 }
 
 const classes = [
-  {id: '0', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Structures', credits: 4},
-  {id: '1', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Structures & Algorithms', credits: 4},
-  {id: '2', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: 4},
-  {id: '3', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: 4},
-  {id: '4', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: 4},
-  {id: '5', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: 4},
-  {id: '6', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: 4},
-  {id: '7', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: 4},
-  {id: '8', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: 4},
-  {id: '9', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: 4},
-  {id: '12', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: 4},
-  {id: '13', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: 4},
-  {id: '14', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: 4},
-  {id: '15', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: 4},
-  {id: '16', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: 4},
-  {id: '17', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: 4},
-  {id: '18', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: 4},
-  {id: '19', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: 4}
+  // {id: '19', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Structures', credits: 4},
+  // {id: '20', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Structures & Algorithms', credits: 4},
+  // {id: '21', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: 4},
+  // {id: '22', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: 4},
+  // {id: '23', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: 4},
+  // {id: '24', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: 4},
+  // {id: '25', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: 4},
+  // {id: '26', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: 4},
+  // {id: '27', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: 4},
+  // {id: '28', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: 4},
+  // {id: '29', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: 4},
+  // {id: '30', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: 4},
+  // {id: '31', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: 4},
+  // {id: '32', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: 4},
+  // {id: '33', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: 4},
+  // {id: '34', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: 4},
+  // {id: '35', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: 4},
+  // {id: '36', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: 4}
 ];
+
+const core_requirements = [
+  {id: '0', academic_group: 'Engineering', subject: 'EECS', course_num: '100', course_name: 'Intro Engineering', credits: 4},
+  {id: '1', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: 'Intro Comp & Prog', credits: 4},
+  {id: '2', academic_group: 'Chemistry', subject: 'CHEM', course_num: '125', course_name: 'Gen Chem Lab I', credits: 1},
+  {id: '3', academic_group: 'Chemistry', subject: 'CHEM', course_num: '126', course_name: 'Gen Chem Lab II', credits: 1},
+  {id: '4', academic_group: 'Chemistry', subject: 'CHEM', course_num: '130', course_name: 'Gen Chemistry', credits: 3},
+  {id: '5', academic_group: 'Physics', subject: 'PHYS', course_num: '140', course_name: 'General Physics I', credits: 4},
+  {id: '6', academic_group: 'Physics', subject: 'PHYS', course_num: '141', course_name: 'Elementary Lab I', credits: 1},
+  {id: '7', academic_group: 'Mathematics', subject: 'MATH', course_num: '115', course_name: 'Calculus I', credits: 4},
+  {id: '8', academic_group: 'Mathematics', subject: 'MATH', course_num: '116', course_name: 'Calculus II', credits: 4},
+  {id: '9', academic_group: 'Mathematics', subject: 'MATH', course_num: '214', course_name: 'Applied Linear Algebra', credits: 4},
+  {id: '10', academic_group: 'Mathematics', subject: 'MATH', course_num: '215', course_name: 'Calculus III', credits: 4},
+  {id: '11', academic_group: 'Physics', subject: 'PHYS', course_num: '240', course_name: 'General Physics II', credits: 4},
+  {id: '12', academic_group: 'Physics', subject: 'PHYS', course_num: '241', course_name: 'Elementary Lab II', credits: 1}
+]
+
+const mde_requirements = [
+  {id: '13', academic_group: 'Engineering', subject: 'EECS', course_num: '441', course_name: 'Mbl App Dev Entrprnr', credits: 4},
+  {id: '14', academic_group: 'Engineering', subject: 'EECS', course_num: '467', course_name: 'Autonomous Robotics Laboratory', credits: 4},
+  {id: '15', academic_group: 'Engineering', subject: 'EECS', course_num: '470', course_name: 'Comp Architecture', credits: 4},
+  {id: '16', academic_group: 'Engineering', subject: 'EECS', course_num: '481', course_name: 'Software Engineering', credits: 4},
+  {id: '17', academic_group: 'Engineering', subject: 'EECS', course_num: '494', course_name: 'Game Design and Implementation', credits: 4},
+  {id: '18', academic_group: 'Engineering', subject: 'EECS', course_num: '497', course_name: 'Major Design Projects', credits: 4},
+  {id: '19', academic_group: 'Technical Communication', subject: 'TCHLCMN', course_num: '496', course_name: 'Adv TchCom for EE/CE', credits: 2},
+  {id: '20', academic_group: 'Engineering', subject: 'EECS', course_num: '496', course_name: 'Major Design Experience Professionalism', credits: 2}
+]
 
 const pieData = [
   {
@@ -113,6 +141,8 @@ class App extends Component {
       setTitle: PropTypes.func,
       setMeta: PropTypes.func,
       setLang: PropTypes.func,
+      setCore: PropTypes.func,
+      setMde: PropTypes.func
     }),
     children: PropTypes.element.isRequired,
     error: PropTypes.object,
@@ -122,7 +152,9 @@ class App extends Component {
     insertCss: PropTypes.func.isRequired,
     setTitle: PropTypes.func.isRequired,
     setMeta: PropTypes.func.isRequired,
-    setLang: PropTypes.func
+    setLang: PropTypes.func,
+    setCore: PropTypes.func,
+    setMde: PropTypes.func
   };
 
   constructor(props) {
@@ -144,6 +176,7 @@ class App extends Component {
       added_classes: [{}],
       credits_completed: 0,
       credits_required: 128,
+      credits_by_semester: []
     };
 
 
@@ -152,6 +185,7 @@ class App extends Component {
     this.updateCredits = this.updateCredits.bind(this);
     this.get_added_classes = this.get_added_classes.bind(this);
     this.remove_course = this.remove_course.bind(this);
+    this.get_heat_bar = this.get_heat_bar.bind(this);
   }
 
 
@@ -176,6 +210,19 @@ class App extends Component {
           message: textMessage,
         });
       },
+      setCore: core => {
+        console.log("HELLO");
+        this.setState({
+          search_classes: core_requirements
+        });
+      },
+      setMde: mde => {
+        console.log("updating mde");
+        console.log(mde_requirements);
+        this.setState({
+          search_classes: mde_requirements
+        });
+      }
     };
   }
 
@@ -264,8 +311,18 @@ class App extends Component {
     return classes;
   }
 
+  get_heat_bar(id){
+    const num_credits = this.state.added_classes.reduce((acc, course) => {
+      if (id == course.semester_id){
+        acc += course.credits;
+      }
+      return acc;
+    }, []);
+    return num_credits;
+  }
+
   onDragEnd (result) {
-    // dropped outside the list
+    // Dropped into the semester tables
     console.log(result);
     if(!result.destination || result.destination.droppableId === 'courses') {
        return;
@@ -274,8 +331,12 @@ class App extends Component {
       this.setState({ credits_completed: this.state.credits_completed + this.state.search_classes[result.source.index].credits })
       this.updateView(result.destination.droppableId, result.source.index);
 
+      var index = result.destination.droppableId.replace( /^\D+/g, '');
       var id = result.destination.droppableId;
+      var heat_id = (result.destination.droppableId + 'heat');
       const element = (<div className="row"> {this.get_added_classes(id, result.source.index)} </div>);
+      const heat_bar = (<ProgressBar max={18} now={this.state.credits_by_semester[index]} />);
+
 
       const search_classes = reorder(
         this.state.search_classes,
@@ -283,9 +344,18 @@ class App extends Component {
         result.destination.index
       );
 
+      const credits_by_semester = this.state.credits_by_semester;
+      credits_by_semesters += this.state.search_classes[result.source.index].credits;
+      console.log("Credits:", credits_by_semester);
       this.setState({
-        search_classes: search_classes
+        search_classes: search_classes,
+        credits_by_semester: credits_by_semester
       });
+      console.log("heat_id:", heat_id)
+      ReactDOM.render(
+        heat_bar,
+        document.getElementById(heat_id)
+      );
       ReactDOM.render(
         element,
         document.getElementById(id)
