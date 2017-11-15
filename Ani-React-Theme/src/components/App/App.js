@@ -176,7 +176,7 @@ class App extends Component {
       added_classes: [{}],
       credits_completed: 0,
       credits_required: 128,
-      credits_by_semester: []
+      credits_by_semester: [0,0,0,0]
     };
 
 
@@ -281,12 +281,16 @@ class App extends Component {
   remove_course(course, index) {
     const newState = this.state.added_classes;
     const search_classes = this.state.search_classes;
+    var credits_by_semester = this.state.credits_by_semester;
+    credits_by_semester[index] -= course.credits;
     newState.splice(newState.indexOf(course), 1);
     search_classes.splice(index, 0, course);
     console.log(search_classes);
+    console.log("credits_by_semester", credits_by_semester);
     this.setState({
       search_classes: search_classes,
-      added_classes: newState
+      added_classes: newState,
+      credits_by_semester: credits_by_semester
     });
 
     this.updateCredits(-course.credits);
@@ -332,11 +336,11 @@ class App extends Component {
       this.updateView(result.destination.droppableId, result.source.index);
 
       var index = result.destination.droppableId.replace( /^\D+/g, '');
+      console.log("index", index);
       var id = result.destination.droppableId;
       var heat_id = (result.destination.droppableId + 'heat');
-      const element = (<div className="row"> {this.get_added_classes(id, result.source.index)} </div>);
-      const heat_bar = (<ProgressBar max={18} now={this.state.credits_by_semester[index]} />);
 
+      console.log("credits:", this.state.credits_by_semester[index]);
 
       const search_classes = reorder(
         this.state.search_classes,
@@ -344,8 +348,12 @@ class App extends Component {
         result.destination.index
       );
 
-      const credits_by_semester = this.state.credits_by_semester;
-      credits_by_semesters += this.state.search_classes[result.source.index].credits;
+      var credits_by_semester = this.state.credits_by_semester;
+      credits_by_semester[index] += this.state.search_classes[result.source.index].credits;
+
+      const element = (<div className="row"> {this.get_added_classes(id, result.source.index)} </div>);
+      const heat_bar = (<ProgressBar max={18} now={this.state.credits_by_semester[index]} />);
+
       console.log("Credits:", credits_by_semester);
       this.setState({
         search_classes: search_classes,

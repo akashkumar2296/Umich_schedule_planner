@@ -761,12 +761,6 @@ class Tables extends Component {
             </Collapsible>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-6">
-            Credit Distribution:
-            <Doughnut data={pieData} options={donutOptions} />
-          </div>
-        </div>
         </div>
         <div className={s.semester}>
           {this.getSemesters()}
