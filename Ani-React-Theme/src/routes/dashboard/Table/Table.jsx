@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Panel, Table } from 'react-bootstrap';
+import { Panel, Table, ProgressBar } from 'react-bootstrap';
 import Collapsible from 'react-collapsible';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Line, Bar, Pie, Doughnut } from 'react-chartjs';
@@ -218,7 +218,9 @@ class Tables extends Component {
     const semester_tables = this.state.items.map(sem =>
       (
         <div className="col-md-3">
-          <div id={sem.id + 'heat'}>&nbsp;</div>
+          <div id={sem.id + 'heat'}>
+          <ProgressBar max={18} now={0} />
+          </div>
           <Panel
             header={<span>{sem.semesters}</span>}
             bsStyle={sem.style}

@@ -81,27 +81,6 @@ const mde_requirements = [
   {id: '20', academic_group: 'Engineering', subject: 'EECS', course_num: '496', course_name: 'Major Design Experience Professionalism', credits: 2}
 ]
 
-const pieData = [
-  {
-    value: 300,
-    color: '#F7464A',
-    highlight: '#FF5A5E',
-    label: 'Red',
-  },
-  {
-    value: 50,
-    color: '#46BFBD',
-    highlight: '#5AD3D1',
-    label: 'Green',
-  },
-  {
-    value: 100,
-    color: '#FDB45C',
-    highlight: '#FFC870',
-    label: 'Yellow',
-  },
-];
-
 const colorGenerator = ['#de6764', '#5bc0de', '#5cb85c', '#f0ad4e']
 
 const reorder = (list, startIndex, endIndex) => {
@@ -171,7 +150,7 @@ class App extends Component {
         subject: '',
         course_num: '',
         course_name: '',
-        credits: ''
+        credits: 0
       }],
       added_classes: [{}],
       credits_completed: 0,
@@ -296,6 +275,8 @@ class App extends Component {
     this.updateCredits(-course.credits);
 
     var id = course.semester_id;
+
+    this.get_heat_bar(course.semester_id);
     const element = (<div className="row"> {this.get_added_classes(id)} </div>);
     ReactDOM.render(
         element,
@@ -316,13 +297,22 @@ class App extends Component {
   }
 
   get_heat_bar(id){
-    const num_credits = this.state.added_classes.reduce((acc, course) => {
+    var heat_id = (id + 'heat');
+    var acc = 0;
+    var num_credits = this.state.added_classes.reduce((acc, course) => {
       if (id == course.semester_id){
         acc += course.credits;
+        console.log(typeof(course.credits));
       }
       return acc;
-    }, []);
-    return num_credits;
+    }, 0);
+    console.log(typeof(num_credits));
+    console.log("get_heat_bar", num_credits);
+    var heat_bar = (<ProgressBar max={18} now={num_credits} />);
+    ReactDOM.render(
+        heat_bar,
+        document.getElementById(heat_id)
+    );
   }
 
   onDragEnd (result) {
@@ -338,7 +328,6 @@ class App extends Component {
       var index = result.destination.droppableId.replace( /^\D+/g, '');
       console.log("index", index);
       var id = result.destination.droppableId;
-      var heat_id = (result.destination.droppableId + 'heat');
 
       console.log("credits:", this.state.credits_by_semester[index]);
 
@@ -351,19 +340,18 @@ class App extends Component {
       var credits_by_semester = this.state.credits_by_semester;
       credits_by_semester[index] += this.state.search_classes[result.source.index].credits;
 
+      if(credits_by_semester[index] > 18){
+        return;
+      }
+
       const element = (<div className="row"> {this.get_added_classes(id, result.source.index)} </div>);
-      const heat_bar = (<ProgressBar max={18} now={this.state.credits_by_semester[index]} />);
+      this.get_heat_bar(id);
 
       console.log("Credits:", credits_by_semester);
       this.setState({
         search_classes: search_classes,
         credits_by_semester: credits_by_semester
       });
-      console.log("heat_id:", heat_id)
-      ReactDOM.render(
-        heat_bar,
-        document.getElementById(heat_id)
-      );
       ReactDOM.render(
         element,
         document.getElementById(id)
