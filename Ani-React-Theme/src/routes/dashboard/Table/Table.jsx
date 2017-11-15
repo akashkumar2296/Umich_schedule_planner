@@ -260,8 +260,8 @@ class Tables extends Component {
           <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span className="panel-title" onClick={this.getCore}>Core Requirements</span>}
-              bsStyle="primary"
+              header={<span className="panel-title">Core Requirements</span>}
+              bsStyle="primary" onClick={this.getCore}
               ></Panel>}
             classParentString = "" contentOuterClassName="panel-body"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
@@ -730,10 +730,10 @@ class Tables extends Component {
         <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span className="panel-title" onClick={this.getMde}>Major Design Experience</span>}
-              bsStyle="primary"></Panel>}
+              header={<span className="panel-title">Major Design Experience</span>}
+              bsStyle="primary" onClick={this.getMde}></Panel>}
             classParentString = "" contentOuterClassName="panel-body"
-            overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
+            overflowWhenOpen="scroll" contentOuterClassName={s.scroller} >
               <Table>
               <thead>
                 <tr>
