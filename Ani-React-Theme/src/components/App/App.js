@@ -311,7 +311,7 @@ class App extends Component {
     }, 0);
     console.log(typeof(num_credits));
     console.log("get_heat_bar", num_credits);
-    var heat_bar = (<ProgressBar max={18} now={num_credits} />);
+    var heat_bar = (<ProgressBar max={18} now={num_credits} label={`${num_credits}/18`} />);
     ReactDOM.render(
         heat_bar,
         document.getElementById(heat_id)

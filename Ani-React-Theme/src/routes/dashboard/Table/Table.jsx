@@ -219,7 +219,7 @@ class Tables extends Component {
       (
         <div className="col-md-3">
           <div id={sem.id + 'heat'}>
-          <ProgressBar max={18} now={0} />
+          <ProgressBar max={18} now={0} label={'0/18'}/>
           </div>
           <Panel
             header={<span>{sem.semesters}</span>}
