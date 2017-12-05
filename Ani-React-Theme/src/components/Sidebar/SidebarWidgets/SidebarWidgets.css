@@ -4,8 +4,28 @@
   position: fixed;
 }
 
+.recommended {
+  position: fixed;
+  bottom: 0px;
+  width: 431px;
+  height: 350px;
+  overflow-y: scroll;
+}
+.header {
+  width: 431px;
+  position: fixed;
+  color: white;
+  font-size: 18px;
+  bottom: 350px;
+  margin-bottom: 5px;
+  text-align: center;
+  border-color: white;
+  border-top-style: solid;
+  border-width: 1px;
+  text-align:center;
+}
+
 .sideWidgets {
-  margin-left: 45px;
   float: left;
   border-top: 1px solid color(var(--brand-primary) blackness(6%));
   width: calc(var(--nav-width ) - 45px);
@@ -29,7 +49,7 @@
   & .widgetsContent {
     padding: 12px;
     overflow: hidden;
-    width: 410px;
+    width: 455px;
     & .avatarName {
       padding-top: 12px;
     }

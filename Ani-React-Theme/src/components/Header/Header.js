@@ -71,13 +71,6 @@ class TopNav extends Component{
             </div>
           </form>
       </div>
-
-        <div id="myNavbar" className={s.navbarCollapse}>
-          Credits Completed
-          <ProgressBar max={1000} now={this.props.credits_completed} label={
-            `${this.props.credits_completed}/${this.props.credits_required}`} />
-
-        </div>
       </nav>
     );
   }

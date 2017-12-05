@@ -1,5 +1,6 @@
 @import '../../variables.css';
 .sideMenu {
+  display: none;
   width: 45px;
   background: color(var(--brand-primary) blackness(20%));
   position: absolute;

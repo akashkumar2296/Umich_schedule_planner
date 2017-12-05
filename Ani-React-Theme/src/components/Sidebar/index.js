@@ -16,7 +16,7 @@ class Sidebar extends Component {
       <aside className={s.sidebar}>
         <div className={'sidenav-outer ' + s.sidenavOuter}>
           <MenuBar />
-          <SidebarWidgets onDragEnd={this.props.onDragEnd} search_classes={this.props.search_classes}/>
+          <SidebarWidgets onDragEnd={this.props.onDragEnd} search_classes={this.props.search_classes} recommended={this.props.recommended}/>
         </div>
       </aside>
     );

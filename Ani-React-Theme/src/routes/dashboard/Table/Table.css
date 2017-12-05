@@ -23,6 +23,44 @@
 	float: right;
 }
 
+ul.checkmark li {
+	margin-bottom: 1em;
+	list-style-type: none;
+	position: relative;
+	text-align: left;
+	&:before {
+		content: " ";
+		display: block;
+		border: solid .8em #5cb85c;
+		border-radius: .8em;
+		height: 0;
+		width: 0;
+		position: absolute;
+		left: .5em;
+		top: 40%;
+		margin-top: -.5em;
+	}
+}
+
+ul.xmark li {
+	margin-bottom: 1em;
+	list-style-type: none;
+	position: relative;
+	text-align: left;
+	&:before {
+		content: " ";
+		display: block;
+		border: solid .8em #de6764;
+		border-radius: .8em;
+		height: 0;
+		width: 0;
+		position: absolute;
+		left: .5em;
+		top: 40%;
+		margin-top: -.5em;
+	}
+}
+
 .scroller {
 	max-height: 220px;
 	overflow: scroll;

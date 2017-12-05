@@ -81,6 +81,11 @@ const mde_requirements = [
   {id: '20', academic_group: 'Engineering', subject: 'EECS', course_num: '496', course_name: 'Major Design Experience Professionalism', credits: 2}
 ]
 
+const recommended = 
+[ {id: '21', academic_group: 'Engineering', subject: 'EECS', course_num: '485', course_name: 'Web Databases and Information Systems', credits: 4},
+  {id: '22', academic_group: 'Engineering', subject: 'EECS', course_num: '484', course_name: 'Database Management Systems', credits: 4}
+ ]
+
 const colorGenerator = ['#de6764', '#5bc0de', '#5cb85c', '#f0ad4e']
 
 const reorder = (list, startIndex, endIndex) => {
@@ -153,6 +158,7 @@ class App extends Component {
         credits: 0
       }],
       added_classes: [{}],
+      recommended: recommended,
       credits_completed: 0,
       credits_required: 128,
       credits_by_semester: [0,0,0,0]
@@ -373,7 +379,7 @@ class App extends Component {
                 <div className={`dashboard-page ${s.dashboardPage}`}>
                   <Header updateCredits={this.updateCredits} credits_completed={this.state.credits_completed}
                     credits_required={this.state.credits_required} />
-                  <Sidebar onDragEnd={this.onDragEnd} search_classes={this.state.search_classes}/>
+                  <Sidebar onDragEnd={this.onDragEnd} search_classes={this.state.search_classes} recommended = {this.state.recommended}/>
                   <section id={s.bodyContainer} className={s.uiView}>
                     {this.props.children}
                   </section>
