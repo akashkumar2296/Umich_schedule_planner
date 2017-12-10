@@ -41,8 +41,8 @@ const General_electives = [
 {class: 'General Electives', satisfied: 'Yes', credits:'15'}];
 
 const panel_styles = ['danger', 'info', 'success', 'warning'];
-const all_semesters = ['Fall', 'Winter', 'Spring', 'Summer'];
-var year = 2017;
+const all_semesters = ['Winter', 'Spring', 'Summer', 'Fall'];
+var year = 2018;
 var num_semesters = 4;
 
 const donutOptions = {
@@ -79,50 +79,7 @@ const donutOptions = {
 
 };
 
-const pieData = [
-  {
-    value: 4,
-    color: '#de6764',
-    highlight: 'grey',
-    label: 'Fall 2017'
-  },
-  {
-    value: 4,
-    color: '#5bc0de',
-    highlight: 'grey',
-    label: 'Winter 2018'
-  },
-  {
-    value: 4,
-    color: '#5cb85c',
-    highlight: 'grey',
-    label: 'Spring 2018'
-  },
-  {
-    value: 4,
-    color: '#f0ad4e',
-    highlight: 'grey',
-    label: 'Summer 2018'
-  }
-];
 
-const areaData = [
-      { name: 'Page A', uv: 4000, pv: 2400, amt: 2400, value: 600 },
-      { name: 'Page B', uv: 3000, pv: 1398, amt: 2210, value: 300 },
-      { name: 'Page C', uv: 2000, pv: 9800, amt: 2290, value: 500 },
-      { name: 'Page D', uv: 2780, pv: 3908, amt: 2000, value: 400 },
-      { name: 'Page E', uv: 1890, pv: 4800, amt: 2181, value: 200 },
-      { name: 'Page F', uv: 2390, pv: 3800, amt: 2500, value: 700 },
-      { name: 'Page G', uv: 3490, pv: 1300, amt: 2100, value: 100 },
-      { name: 'Page H', uv: 3490, pv: 3300, amt: 2100, value: 200 },
-      { name: 'Page I', uv: 2490, pv: 2300, amt: 2100, value: 300 },
-      { name: 'Page J', uv: 5490, pv: 2800, amt: 2100, value: 700 },
-      { name: 'Page G', uv: 4490, pv: 3800, amt: 2100, value: 400 },
-      { name: 'Page H', uv: 2490, pv: 1300, amt: 2100, value: 300 },
-      { name: 'Page I', uv: 5490, pv: 4300, amt: 2100, value: 500 },
-      { name: 'Page J', uv: 2490, pv: 3300, amt: 2100, value: 100 },
-      { name: 'Page K', uv: 4490, pv: 2300, amt: 2100, value: 500 },
-];
 
 const colorGenerator = ['#de6764', '#5bc0de', '#5cb85c', '#f0ad4e']
 
@@ -150,11 +107,27 @@ class Tables extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      logname: '',
       items: [{
         semesters: '',
         style: '',
         year: '',
       }],
+      program_id: '',
+      program_name: '',
+      requirements: [{
+        req_id: '',
+        req_name: '',
+        credits_reqd: 0,
+        credits_completed: 0,
+        req_rows: [{
+          sub_req_id: ''
+          sub_req_name: '',
+          num_credits: 0,
+          num_credits_satisfied: 0,
+          satisfied: false,
+        }]
+      }]
    }
     this.createSemesters = this.createSemesters.bind(this);
     this.getSemesters = this.getSemesters.bind(this);
@@ -214,6 +187,8 @@ class Tables extends Component {
   //     return ({semester_rows});
   // }
 
+
+
   getSemesters() {
     const semester_tables = this.state.items.map(sem =>
       (
@@ -252,9 +227,60 @@ class Tables extends Component {
     );
   }
 
-  render() {
-    return (
-      <div ref="root" className="animate">
+  getSatisfied(completed) {
+    if(completed) {
+      return "s.checkmark";
+    }
+    return "s.xmark";
+  }
+
+  getRequirements() {
+    const requirements = this.state.requirements.map(req =>
+      (
+        <div className="col-md-6">
+        <Collapsible
+          trigger={<Panel
+            header={<span className="panel-title">Core Requirements</span>}
+            bsStyle="primary" onClick={this.getCore}
+            ></Panel>}
+          classParentString = "" contentOuterClassName="panel-body"
+          overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
+            <Table>
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Credits</th>
+                <th>Satisfied</th>
+              </tr>
+            </thead>
+              <tbody>
+                {req.req_rows.map(row => 
+                  (
+                    <tr>
+                      <td>{row.sub_req_name}</td>
+                      <td>{row.num_credits_satisfied}/{row.num_credits}</td>
+                      <ul className={this.getSatisfied(row.satisfied)}
+                        <li></li>
+                      </ul>
+                    </tr>
+                  ),
+                );}
+              </tbody>
+            </Table>
+          </Collapsible>
+        </div>
+    );
+
+  return
+    (
+      <div className={s.requirements}>
+        {requirements}
+      </div>
+    );
+  }
+
+  getRequirements() {
+    return(
       <div className={s.requirements}>
         <div className="row">
           <div className="col-md-6">
@@ -284,7 +310,7 @@ class Tables extends Component {
                   <tr>
                     <td>{egr[1]['class']}</td>
                     <td>{egr[1]['credits']}</td>
-                    <ul className={s.xmark}>
+                    <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   </tr>
@@ -294,7 +320,7 @@ class Tables extends Component {
                 <tr>
                   <td>{chemistry[0]['class']}</td>
                   <td>{chemistry[0]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -302,7 +328,7 @@ class Tables extends Component {
                 <tr>
                   <td>{chemistry[1]['class']}</td>
                   <td>{chemistry[1]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -321,7 +347,7 @@ class Tables extends Component {
                 <tr>
                   <td>{physics[0]['class']}</td>
                   <td>{physics[0]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -329,7 +355,7 @@ class Tables extends Component {
                 <tr>
                   <td>{physics[1]['class']}</td>
                   <td>{physics[1]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -337,7 +363,7 @@ class Tables extends Component {
                 <tr>
                   <td>{physics[2]['class']}</td>
                   <td>{physics[2]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -345,7 +371,7 @@ class Tables extends Component {
                 <tr>
                   <td>{physics[3]['class']}</td>
                   <td>{physics[3]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -358,7 +384,7 @@ class Tables extends Component {
                 <tr>
                   <td>{math[0]['class']}</td>
                   <td>{math[0]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -366,7 +392,7 @@ class Tables extends Component {
                 <tr>
                   <td>{math[1]['class']}</td>
                   <td>{math[1]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -374,7 +400,7 @@ class Tables extends Component {
                 <tr>
                   <td>{math[2]['class']}</td>
                   <td>{math[2]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -382,37 +408,7 @@ class Tables extends Component {
                 <tr>
                   <td>{math[3]['class']}</td>
                   <td>{math[3]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-
-              <tbody>
-                <tr>
-                  <td>{Intellectual_Breadth[0]['class']}</td>
-                  <td>{Intellectual_Breadth[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{Intellectual_Breadth[1]['class']}</td>
-                  <td>{Intellectual_Breadth[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-
-              <tbody>
-                <tr>
-                  <td>{General_electives[0]['class']}</td>
-                  <td>{General_electives[0]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   
@@ -424,7 +420,7 @@ class Tables extends Component {
           <div className="col-md-6">
           <Collapsible
             trigger={<Panel
-              header={<span className="panel-title">Humanities</span>}
+              header={<span className="panel-title">Intellectual Breadth</span>}
               bsStyle="primary"></Panel>}
             classParentString = "" contentOuterClassName="panel-body"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
@@ -438,174 +434,30 @@ class Tables extends Component {
               </thead>
                 <tbody>
                   <tr>
-                    <td>{egr[0]['class']}</td>
-                    <td>{egr[0]['credits']}</td>
-                    <ul className={s.xmark}>
+                    <td> Humanities </td>
+                    <td> 3 </td>
+                    <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                     
                   </tr>
                   <tr>
-                    <td>{egr[1]['class']}</td>
-                    <td>{egr[1]['credits']}</td>
-                    <ul className={s.xmark}>
+                    <td> Upper Level Humanities </td>
+                    <td> 3 </td>
+                    <ul className={s.checkmark}>
+                      <li></li>
+                    </ul>
+                    
+                  </tr>
+                  <tr>
+                    <td> Total Credits 16 </td>
+                    <td> 16 </td>
+                    <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                     
                   </tr>
                 </tbody>
-
-              <thead>
-                <tr>
-                  <th>{preReq[1]}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{chemistry[0]['class']}</td>
-                  <td>{chemistry[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{chemistry[1]['class']}</td>
-                  <td>{chemistry[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{chemistry[2]['class']}</td>
-                  <td>{chemistry[2]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-
-
-
-              <tbody>
-                <tr>
-                  <td>{physics[0]['class']}</td>
-                  <td>{physics[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{physics[1]['class']}</td>
-                  <td>{physics[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{physics[2]['class']}</td>
-                  <td>{physics[2]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{physics[3]['class']}</td>
-                  <td>{physics[3]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-
-              <br></br>
-              
-
-              <tbody>
-                <tr>
-                  <td>{math[0]['class']}</td>
-                  <td>{math[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{math[1]['class']}</td>
-                  <td>{math[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{math[2]['class']}</td>
-                  <td>{math[2]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{math[3]['class']}</td>
-                  <td>{math[3]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-              
-              
-              <thead>
-              <tr>
-              <th>{preReq[4]}</th>
-              </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{Intellectual_Breadth[0]['class']}</td>
-                  <td>{Intellectual_Breadth[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{Intellectual_Breadth[1]['class']}</td>
-                  <td>{Intellectual_Breadth[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-              
-              
-              <thead>
-              <tr>
-              <th>{preReq[5]}</th>
-              </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{General_electives[0]['class']}</td>
-                  <td>{General_electives[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
               </Table>
             </Collapsible>
           </div>
@@ -620,175 +472,39 @@ class Tables extends Component {
             classParentString = "" contentOuterClassName="panel-body"
             overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
               <Table>
-              <thead>
-                <tr>
-                  <th>Class</th>
-                  <th>Credits</th>
-                  <th>Satisfied</th>
-                </tr>
-              </thead>
-                <tbody>
+                  <thead>
+                    <tr>
+                      <th>Class</th>
+                      <th>Credits</th>
+                      <th>Satisfied</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                   <tr>
-                    <td>{egr[0]['class']}</td>
-                    <td>{egr[0]['credits']}</td>
-                    <ul className={s.xmark}>
+                    <td>Upper Level CS Technical Electives</td>
+                    <td>16</td>
+                    <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                     
                   </tr>
                   <tr>
-                    <td>{egr[1]['class']}</td>
-                    <td>{egr[1]['credits']}</td>
+                    <td>18 CS Units</td>
+                    <td>18</td>
                     <ul className={s.xmark}>
                       <li></li>
                     </ul>
                     
                   </tr>
-                </tbody>
               
-              <thead>
-                <tr>
-                  <th>{preReq[1]}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{chemistry[0]['class']}</td>
-                  <td>{chemistry[0]['credits']}</td>
-                  <ul className={s.xmark}>
+                  <tr>
+                    <td>Flexible Technical Electives</td>
+                    <td>10</td>
+                    <ul className={s.xmark}>
                       <li></li>
                     </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{chemistry[1]['class']}</td>
-                  <td>{chemistry[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{chemistry[2]['class']}</td>
-                  <td>{chemistry[2]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-
-
-
-              <tbody>
-                <tr>
-                  <td>{physics[0]['class']}</td>
-                  <td>{physics[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{physics[1]['class']}</td>
-                  <td>{physics[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{physics[2]['class']}</td>
-                  <td>{physics[2]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{physics[3]['class']}</td>
-                  <td>{physics[3]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-
-              <br></br>
-              
-
-              <tbody>
-                <tr>
-                  <td>{math[0]['class']}</td>
-                  <td>{math[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{math[1]['class']}</td>
-                  <td>{math[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{math[2]['class']}</td>
-                  <td>{math[2]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{math[3]['class']}</td>
-                  <td>{math[3]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-              
-              
-              <thead>
-              <tr>
-              <th>{preReq[4]}</th>
-              </tr>
-              </thead>
-
-              <tbody>
-                <tr>
-                  <td>{Intellectual_Breadth[0]['class']}</td>
-                  <td>{Intellectual_Breadth[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-                <tr>
-                  <td>{Intellectual_Breadth[1]['class']}</td>
-                  <td>{Intellectual_Breadth[1]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
-              </tbody>
-
-              <tbody>
-                <tr>
-                  <td>{General_electives[0]['class']}</td>
-                  <td>{General_electives[0]['credits']}</td>
-                  <ul className={s.xmark}>
-                      <li></li>
-                    </ul>
-                  
-                </tr>
+                    
+                  </tr>
               </tbody>
               </Table>
             </Collapsible>
@@ -813,22 +529,21 @@ class Tables extends Component {
                   <tr>
                     <td>MDE Course</td>
                     <td>{egr[0]['credits']}</td>
-                    <ul className={s.xmark}>
+                    <ul className={s.checkmark}>
                       <li></li>
                     </ul>
-                    
                   </tr>
                   <tr>
                     <td>Adv TchCom for EE/CE</td>
                     <td>2</td>
-                    <ul className={s.xmark}>
+                    <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   </tr>
                   <tr>
                     <td>Major Design Experience Professionalism</td>
                     <td>2</td>
-                    <ul className={s.xmark}>
+                    <ul className={s.checkmark}>
                       <li></li>
                     </ul>
                   </tr>
@@ -838,6 +553,13 @@ class Tables extends Component {
           </div>
         </div>
         </div>
+      );
+  }
+
+  render() {
+    return (
+      <div ref="root" className="animate">
+        {this.getRequirements()}
         <div className={s.semester}>
           {this.getSemesters()}
         </div>
