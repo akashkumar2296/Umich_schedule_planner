@@ -121,7 +121,7 @@ class Tables extends Component {
         credits_reqd: 0,
         credits_completed: 0,
         req_rows: [{
-          sub_req_id: ''
+          sub_req_id: '',
           sub_req_name: '',
           num_credits: 0,
           num_credits_satisfied: 0,
@@ -234,50 +234,50 @@ class Tables extends Component {
     return "s.xmark";
   }
 
-  getRequirements() {
-    const requirements = this.state.requirements.map(req =>
-      (
-        <div className="col-md-6">
-        <Collapsible
-          trigger={<Panel
-            header={<span className="panel-title">Core Requirements</span>}
-            bsStyle="primary" onClick={this.getCore}
-            ></Panel>}
-          classParentString = "" contentOuterClassName="panel-body"
-          overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
-            <Table>
-            <thead>
-              <tr>
-                <th>Class</th>
-                <th>Credits</th>
-                <th>Satisfied</th>
-              </tr>
-            </thead>
-              <tbody>
-                {req.req_rows.map(row => 
-                  (
-                    <tr>
-                      <td>{row.sub_req_name}</td>
-                      <td>{row.num_credits_satisfied}/{row.num_credits}</td>
-                      <ul className={this.getSatisfied(row.satisfied)}
-                        <li></li>
-                      </ul>
-                    </tr>
-                  ),
-                );}
-              </tbody>
-            </Table>
-          </Collapsible>
-        </div>
-    );
+  // getRequirements() {
+  //   const requirements = this.state.requirements.map(req =>
+  //     (
+  //       <div className="col-md-6">
+  //       <Collapsible
+  //         trigger={<Panel
+  //           header={<span className="panel-title">Core Requirements</span>}
+  //           bsStyle="primary" onClick={this.getCore}
+  //           ></Panel>}
+  //         classParentString = "" contentOuterClassName="panel-body"
+  //         overflowWhenOpen="scroll" contentOuterClassName={s.scroller}>
+  //           <Table>
+  //           <thead>
+  //             <tr>
+  //               <th>Class</th>
+  //               <th>Credits</th>
+  //               <th>Satisfied</th>
+  //             </tr>
+  //           </thead>
+  //             <tbody>
+  //               {req.req_rows.map(row => 
+  //                 (
+  //                   <tr>
+  //                     <td>{row.sub_req_name}</td>
+  //                     <td>{row.num_credits_satisfied}/{row.num_credits}</td>
+  //                     <ul className={this.getSatisfied(row.satisfied)}
+  //                       <li></li>
+  //                     </ul>
+  //                   </tr>
+  //                 ),
+  //               );}
+  //             </tbody>
+  //           </Table>
+  //         </Collapsible>
+  //       </div>
+  //   );
 
-  return
-    (
-      <div className={s.requirements}>
-        {requirements}
-      </div>
-    );
-  }
+  // return
+  //   (
+  //     <div className={s.requirements}>
+  //       {requirements}
+  //     </div>
+  //   );
+  // }
 
   getRequirements() {
     return(

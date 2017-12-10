@@ -33,26 +33,26 @@ const langMessage = {
   'ur': urduMessages,
 }
 
-const classes = [
-  // {id: '19', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Structures', credits: 4},
-  // {id: '20', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Structures & Algorithms', credits: 4},
-  // {id: '21', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: 4},
-  // {id: '22', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: 4},
-  // {id: '23', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: 4},
-  // {id: '24', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: 4},
-  // {id: '25', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: 4},
-  // {id: '26', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: 4},
-  // {id: '27', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: 4},
-  // {id: '28', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: 4},
-  // {id: '29', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: 4},
-  // {id: '30', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: 4},
-  // {id: '31', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: 4},
-  // {id: '32', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: 4},
-  // {id: '33', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: 4},
-  // {id: '34', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: 4},
-  // {id: '35', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: 4},
-  // {id: '36', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: 4}
-];
+// const classes = [
+//   {id: '19', academic_group: 'Engineering', subject: 'EECS', course_num: '280', course_name: 'Prog & Data Structures', credits: 4},
+//   {id: '20', academic_group: 'Engineering', subject: 'EECS', course_num: '281', course_name: 'Data Structures & Algorithms', credits: 4},
+//   {id: '21', academic_group: 'Engineering', subject: 'EECS', course_num: '101', course_name: '', credits: 4},
+//   {id: '22', academic_group: 'Engineering', subject: 'EECS', course_num: '183', course_name: '', credits: 4},
+//   {id: '23', academic_group: 'Engineering', subject: 'EECS', course_num: '203', course_name: '', credits: 4},
+//   {id: '24', academic_group: 'Engineering', subject: 'EECS', course_num: '215', course_name: '', credits: 4},
+//   {id: '25', academic_group: 'Engineering', subject: 'EECS', course_num: '216', course_name: '', credits: 4},
+//   {id: '26', academic_group: 'Engineering', subject: 'EECS', course_num: '230', course_name: '', credits: 4},
+//   {id: '27', academic_group: 'Engineering', subject: 'EECS', course_num: '250', course_name: '', credits: 4},
+//   {id: '28', academic_group: 'Engineering', subject: 'EECS', course_num: '270', course_name: '', credits: 4},
+//   {id: '29', academic_group: 'Engineering', subject: 'EECS', course_num: '282', course_name: '', credits: 4},
+//   {id: '30', academic_group: 'Engineering', subject: 'EECS', course_num: '283', course_name: '', credits: 4},
+//   {id: '31', academic_group: 'Engineering', subject: 'EECS', course_num: '285', course_name: '', credits: 4},
+//   {id: '32', academic_group: 'Engineering', subject: 'EECS', course_num: '301', course_name: '', credits: 4},
+//   {id: '33', academic_group: 'Engineering', subject: 'EECS', course_num: '311', course_name: '', credits: 4},
+//   {id: '34', academic_group: 'Engineering', subject: 'EECS', course_num: '312', course_name: '', credits: 4},
+//   {id: '35', academic_group: 'Engineering', subject: 'EECS', course_num: '314', course_name: '', credits: 4},
+//   {id: '36', academic_group: 'Engineering', subject: 'EECS', course_num: '320', course_name: '', credits: 4}
+// ];
 
 const core_requirements = [
   {id: '0', academic_group: 'Engineering', subject: 'EECS', course_num: '100', course_name: 'Intro Engineering', credits: 4},
