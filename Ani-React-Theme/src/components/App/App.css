@@ -213,6 +213,7 @@ textarea {
 #bodyContainer {
   margin-left: var(--nav-width);
   padding: 10px;
+  padding-top: 0px;
   margin-top: 50px;
   overflow: auto;
   overflow-x: hidden;

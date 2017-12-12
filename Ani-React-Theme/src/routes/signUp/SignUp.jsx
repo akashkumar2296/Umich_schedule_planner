@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, Nav, NavItem, NavDropdown } from 'react-bootstrap';
+import Dropdown from 'react-dropdown'
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './SignUp.css';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -8,85 +9,91 @@ import History from '../../core/history';
 import flatAvatar from '../../common/images/flat-avatar.png';
 
 const title = 'Sign Up';
-
+const options = [
+  'Computer Science Engineering'
+]
+const defaultOption = options[0]
 class SignUp extends Component {
 
   static contextTypes = {
     setTitle: PropTypes.func.isRequired,
+    setLogname: PropTypes.func.isRequired,
+    setProg: PropTypes.func.isRequired,
   };
   constructor(props) {
     super(props);
-    this.register = this.register.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleProgram = this.handleProgram.bind(this);
+    this.state = {logname: '', program: ''};
   }
-
 
   componentWillMount() {
     this.context.setTitle(title);
   }
-  register(e) {
-    e.preventDefault();
-    History.push('/');
-    return false;
+
+  componentDidMount() {
+    this.setState({
+      logname: '',
+      program: ''
+    })
   }
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  handleChange(event) {
+    this.context.setLogname(event.target.value);
+    this.setState({
+      logname: event.target.value
+    }, () => {
+      console.log("New state in ASYNC callback:", this.state.logname);
+    });
+  }
+
+  handleProgram(event) {
+    this.context.setProg(event.value);
+    this.setState({
+      program: event.value
+    }, () => {
+      console.log("New state in ASYNC callback:", this.state.program);
+    });
+  }
+
   render() {
     return (
       <div className={`animate ${s.signUp}`}>
         <div className="row">
           <div className="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
-            <img src={flatAvatar} alt="flat Avatar" className="user-avatar" />
-            <h1>Ani Theme </h1>
-            <form role="form" onSubmit={this.register}>
+            <h1>Course Scheduler</h1>
+            <form role="form" onSubmit={this.handleSubmit}>
               <div className={s.formContent}>
                 <FormGroup>
                   <FormControl
                     id=""
                     type="text"
+                    value={this.state.logname}
+                    onChange={this.handleChange.bind(this)}
                     placeholder="Full Name"
                     className={s.inputStyle}
                   />
                 </FormGroup>
                 <FormGroup>
-                  <FormControl
-                    id=""
-                    type="text"
-                    placeholder="Email"
-                    className={s.inputStyle}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FormControl
-                    id=""
-                    type="text"
-                    placeholder="Password"
-                    className={s.inputStyle}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FormControl
-                    id=""
-                    type="text"
-                    placeholder="Repeat Password"
-                    className={s.inputStyle}
-                  />
+                  <div className={s.dropdown}>
+                    <Dropdown type="text" options={options} value={this.state.program} onChange={this.handleProgram.bind(this)} placeholder="Select your degree program" />
+                  </div>
                 </FormGroup>
               </div>
-              <Button
-                type="submit"
-                className={
-                    `btn btn-white btn-outline btn-lg btn-rounded progress-login ${s.btn}`
-                  }
-              >
-                Register
-              </Button>
-              <span>&nbsp;&nbsp;</span>
-              <Link to="/login">
+              <Link to="/dashboard/table">
                 <Button
                   type="submit"
                   className={
-                    `btn btn-white btn-outline btn-lg btn-rounded progress-login ${s.btn}`
-                  }
-                >Log in
+                      `btn btn-white btn-outline btn-lg btn-rounded progress-login ${s.btn}`
+                    }
+                >
+                  Register
                 </Button>
+              <span>&nbsp;&nbsp;</span>
               </Link>
 
             </form>

@@ -58,16 +58,28 @@
   margin: 0;
 }
 
-.navbarFilter {
-  float: right !important;
-  padding-top: 20px;
+.navBarName {
+  font-size: 1.2em;
+  float: right;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-left: 12px;
+  padding-bottom: 12px;
+  vertical-align: middle;
+}
+
+.navBarProgram {
+  font-size: 1.6em;
+  float: left;
+  vertical-align: middle;
+  padding-top: 10px;
 }
 
 .topNavbar {
   background: none;
   border-radius: 0;
   border: none;
-  max-height: 450px !important;
+  max-height: 400px !important;
   overflow: hidden;
 
   & .navbarHeader {

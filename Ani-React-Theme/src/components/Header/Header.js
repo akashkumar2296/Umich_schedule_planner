@@ -34,6 +34,8 @@ const defaultOption = options[0]
 class TopNav extends Component{
   static contextTypes = {
     setLang: PropTypes.func.isRequired,
+    logname: PropTypes.string,
+    program: PropTypes.string
   };
 
   constructor(props) {
@@ -70,7 +72,15 @@ class TopNav extends Component{
               <input type="text" className={"form-control " + s.formControl} placeholder="Search Classes" />
             </div>
           </form>
-      </div>
+        </div>
+        <div className="row">
+          <div className={s.navBarProgram}>
+            {this.props.program}
+          </div>
+          <div className={s.navBarName}>
+            {this.props.logname}
+          </div>
+        </div>
       </nav>
     );
   }

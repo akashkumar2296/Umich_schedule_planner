@@ -9,6 +9,7 @@
 
 @import '../../components/variables.css';
 
+
 .homeStats {
   & a {
     color: inherit;

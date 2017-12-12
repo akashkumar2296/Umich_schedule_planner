@@ -3,6 +3,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { FormattedMessage } from 'react-intl';
 import s from './SidebarWidgets.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Button, FormGroup, FormControl } from 'react-bootstrap';
+import Link from '../../../components/Link';
 
 // class ClassAcademicGroup extends Component {
 
@@ -133,20 +135,34 @@ const getListStyle = (isDraggingOver) => ({
   padding: 0,
   width: '100%'
 });
-      
+
 class FilterableClassesTable extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      logname: ''
+    }
   }
 
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
-     return (
-      <div className={s.classList}>
+    console.log(this.props.search_classes);
+    var ret_val;
+    if(!this.props.search_classes){
+      ret_val = (
+        <div className={s.infomessage}>
+          <div className="row">Click a requirement panel to fill this area with valid courses.</div>
+          <br></br>
+          <div className="row">Drag courses to the semester tables to build your course plan.</div>
+        </div>
+      );
+    }
+    else{
+      ret_val = (
         <Droppable droppableId="courses">
           {(provided, snapshot) => (
-            <div 
+            <div
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
@@ -186,9 +202,11 @@ class FilterableClassesTable extends Component {
             </div>
            )}
         </Droppable>
-      </div>
-     );
-  }
+      );
+    }
+    return (
+      <div>{ret_val}</div>)
+   }
 }
 
 export default withStyles(s)(FilterableClassesTable);
