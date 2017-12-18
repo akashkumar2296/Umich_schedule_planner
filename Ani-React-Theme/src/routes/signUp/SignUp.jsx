@@ -7,6 +7,14 @@ import s from './SignUp.css';
 import Link from '../../components/Link';
 import History from '../../core/history';
 import flatAvatar from '../../common/images/flat-avatar.png';
+import Dropzone from 'react-dropzone';
+
+
+
+
+var files;
+var request = require("superagent");
+var FileInput = require('react-file-input');
 
 const title = 'Sign Up';
 const options = [
@@ -19,12 +27,13 @@ class SignUp extends Component {
     setTitle: PropTypes.func.isRequired,
     setLogname: PropTypes.func.isRequired,
     setProg: PropTypes.func.isRequired,
+    setFile: PropTypes.func.isRequired
   };
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleProgram = this.handleProgram.bind(this);
-    this.state = {logname: '', program: ''};
+    this.state = {logname: '', program: '', files: ''};
   }
 
   componentWillMount() {
@@ -34,12 +43,14 @@ class SignUp extends Component {
   componentDidMount() {
     this.setState({
       logname: '',
-      program: ''
+      program: '',
+      file: ''
     })
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log(this.state)
   }
 
   handleChange(event) {
@@ -60,12 +71,24 @@ class SignUp extends Component {
     });
   }
 
+  handleInput(event) {
+  
+    console.log(event.target.files[0]);
+    this.context.setFile(event.target.files[0]);
+    this.setState({
+      files: event.target.files[0]
+    }, () => {
+      console.log("New state in ASYNC callback:", this.state.program);
+    });
+        
+  }
+
   render() {
     return (
       <div className={`animate ${s.signUp}`}>
         <div className="row">
           <div className="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
-            <h1>Course Scheduler</h1>
+            <h1>University of Michigan Course Planner</h1>
             <form role="form" onSubmit={this.handleSubmit}>
               <div className={s.formContent}>
                 <FormGroup>
@@ -78,15 +101,21 @@ class SignUp extends Component {
                     className={s.inputStyle}
                   />
                 </FormGroup>
-                <div className={s.fileinput}>
-                  <input type="file" name="file" id="file" />
-                  <button className={s.btnfileinput}>Import Course History</button>
-                </div>
+          
                 <FormGroup>
                   <div className={s.dropdown}>
                     <Dropdown type="text" options={options} value={this.state.program} onChange={this.handleProgram.bind(this)} placeholder="Select your degree program" />
                   </div>
                 </FormGroup>
+
+                <FormControl
+                    id=""
+                    type="file"
+                    value={this.state.files}
+                    onChange={this.handleInput.bind(this)}
+                    className={s.inputStyle}
+                  />
+
               </div>
               <Link to="/dashboard/table">
                 <Button

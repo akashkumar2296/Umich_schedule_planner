@@ -548,7 +548,7 @@ const FTE = [
 const program_core = [
 {id: '51', academic_group: 'ProgramCore', subject: 'EECS', course_num: '203', course_name: 'Discrete Mathematics', credits: 4},
 {id: '52', academic_group: 'ProgramCore', subject: 'EECS', course_num: '280', course_name: 'Programming and Data Structures', credits: 4},
-{id: '53', academic_group: 'ProgramCore', subject: 'EECS', course_num: '281', course_name: 'Data Structures and Algorithms', credits: 4},
+{id: '53', academic_group: 'ProgramCore', subject: 'EECS', course_num: '281', course_name: 'Data Structures and Algorithms', credits: 4, 'pre-req': [['EECS','281']]},
 {id: '54', academic_group: 'ProgramCore', subject: 'EECS', course_num: '370', course_name: 'Intro to Computer Organization', credits: 4},
 {id: '55', academic_group: 'ProgramCore', subject: 'EECS', course_num: '376', course_name: 'Foundations of Computer Science', credits: 4},
 {id: '56', academic_group: 'ProgramCore', subject: 'STATS', course_num: '250', course_name: 'Introduction to Statistics and Data Analysis', credits: 4},
