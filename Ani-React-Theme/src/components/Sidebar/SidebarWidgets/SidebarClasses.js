@@ -147,14 +147,13 @@ class FilterableClassesTable extends Component {
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   render() {
-    console.log(this.props.search_classes);
     var ret_val;
     if(!this.props.search_classes){
       ret_val = (
         <div className={s.infomessage}>
-          <div className="row">Click a requirement panel to fill this area with valid courses.</div>
+          <div className="row">Click a requirement panel or use the search bar above to fill this area with valid courses</div>
           <br></br>
-          <div className="row">Drag courses to the semester tables to build your course plan.</div>
+          <div className="row">Then, drag courses to the semester tables to build your course plan</div>
         </div>
       );
     }

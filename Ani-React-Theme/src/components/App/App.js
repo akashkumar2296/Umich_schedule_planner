@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import emptyFunction from 'fbjs/lib/emptyFunction';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Search } from 'full-text-search';
 import $ from 'jquery';
 import s from './App.css';
 import s2 from '../../routes/dashboard/Table/Table.css'
@@ -20,11 +21,17 @@ import ur from 'react-intl/locale-data/ur';
 import de from 'react-intl/locale-data/de';
 import ReactDOM from 'react-dom';
 import { Panel, ProgressBar, Button } from 'react-bootstrap';
-
+var fullTextSearch = require('full-text-search');
+var search = new fullTextSearch({
+  index_amount: 15,
+  minimum_chars: 3
+});
 // import localForage from 'localforage';
 
 
 addLocaleData([...en, ...hi, ...ur, ...de]);
+
+
 
 const langMessage = {
   'en': englishMessages,
@@ -575,6 +582,446 @@ const mde_requirements = [
   {id: '78', academic_group: 'Engineering', subject: 'EECS', course_num: '496', course_name: 'Major Design Experience Professionalism', credits: 2}
 ]
 
+const cse_requirements = {
+  requirements: [{
+    req_id: 0,
+    req_name: 'Core Requirements',
+    credits_reqd: 4,
+    credits_completed: 0,
+    req_rows: [
+    {
+      sub_req_name: 'Engineering 100',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 100,
+        course_subject: 'EECS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Engineering 101/151',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 4,
+      courses: [
+      {
+        course_num: 101,
+        course_subject: 'EECS'
+      },
+      {
+        course_num: 151,
+        course_subject: 'EECS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Chemistry 125',
+      num_credits: 1,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 125,
+        course_subject: 'CHEM'
+      }
+      ]
+    },
+    {
+      sub_req_name: 'Chemistry 126',
+      num_credits: 1,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 126,
+        course_subject: 'CHEM'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Chemistry 130/210/211',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 130,
+        course_subject: 'CHEM'
+      },
+      {
+        course_num: 210,
+        course_subject: 'CHEM'
+      },
+      {
+        course_num: 211,
+        course_subject: 'CHEM'
+      },
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Physics 140',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 140,
+        course_subject: 'PHYS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Physics 141',
+      num_credits: 1,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 141,
+        course_subject: 'PHYS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Physics 240',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 240,
+        course_subject: 'PHYS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Physics 241',
+      num_credits: 1,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 241,
+        course_subject: 'PHYS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Math 115/120',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 115,
+        course_subject: 'MATH'
+      },
+      {
+        course_num: 120,
+        course_subject: 'MATH'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Math 116/121',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 116,
+        course_subject: 'MATH'
+      },
+      {
+        course_num: 121,
+        course_subject: 'MATH'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Math 214/217/417/419',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 214,
+        course_subject: 'MATH'
+      },
+      {
+        course_num: 217,
+        course_subject: 'MATH'
+      },
+      {
+        course_num: 417,
+        course_subject: 'MATH'
+      },
+      {
+        course_num: 419,
+        course_subject: 'MATH'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Math 215/216',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 215,
+        course_subject: 'MATH'
+      },
+      {
+        course_num: 216,
+        course_subject: 'MATH'
+      }
+      ],
+      satisfied: false
+    }
+    ]
+  },
+  {
+    req_id: 1,
+    req_name: 'Program Core',
+    credits_reqd: 4,
+    credits_completed: 0,
+    req_rows: [
+    {
+      sub_req_name: 'EECS 203',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 203,
+        course_subject: 'EECS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'EECS 280',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 280,
+        course_subject: 'EECS'
+      }
+      ],
+      satisfied: false
+    },
+        {
+      sub_req_name: 'EECS 281',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 281,
+        course_subject: 'EECS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'EECS 370',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 370,
+        course_subject: 'EECS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'EECS 376',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 376,
+        course_subject: 'EECS'
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'STATS 250',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 250,
+        course_subject: 'STATS'
+      }
+      ],
+      satisfied: false
+    }
+    ]
+  },
+    {
+    req_id: 2,
+    req_name: 'Intellectual Breadth',
+    credits_reqd: 16,
+    credits_completed: 0,
+    req_rows: [
+    {
+      sub_req_name: 'Humanities',
+      num_credits: 16,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Upper Level Humanities',
+      num_credits: 3,
+      num_credits_satisfied: 0,
+      course_num_req: 300,
+      courses: [
+      {
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Total Credits',
+      num_credits: 16,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+      }
+      ],
+      satisfied: false
+    }
+  ]
+  },
+  {
+    req_id: 3,
+    req_name: 'Technical Electives',
+    credits_reqd: 26,
+    credits_completed: 0,
+    req_rows: [
+    {
+      sub_req_name: 'Upper Level Technical Electives',
+      num_credits: 16,
+      num_credits_satisfied: 0,
+      course_num_req: 300,
+      courses: [
+      {
+      }
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Total Credits',
+      num_credits: 26,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+      }
+      ],
+      satisfied: false
+    }
+    ]
+  },
+    {
+    req_id: 4,
+    req_name: 'Major Design Experience',
+    credits_reqd: 26,
+    credits_completed: 0,
+    req_rows: [
+    {
+      sub_req_name: 'Major Design Experience Course',
+      num_credits: 4,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 441,
+        course_subject: 'EECS'
+      },
+      {
+        course_num: 467,
+        course_subject: 'EECS'
+      },
+      {
+        course_num: 470,
+        course_subject: 'EECS'
+      },
+      {
+        course_num: 481,
+        course_subject: 'EECS'
+      },
+      {
+        course_num: 494,
+        course_subject: 'EECS'
+      },
+      ],
+      satisfied: false
+    },
+    {
+      sub_req_name: 'Adv TchCom for EE/CE',
+      num_credits: 2,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 496,
+        course_subject: 'TCHLCMN'
+      }
+      ]
+    },
+    {
+      sub_req_name: 'Major Design Experience Professionalism',
+      num_credits: 2,
+      num_credits_satisfied: 0,
+      course_num_req: 0,
+      courses: [
+      {
+        course_num: 496,
+        course_subject: 'EECS'
+      }
+      ]
+    }
+    ]
+  }
+]
+};
+
+// Add files to search
+const all_courses = ULCS.concat(FTE).concat(program_core).concat(core_requirements).concat(mde_requirements);
+// search.add(FTE);
+// search.add(program_core);
+// search.add(core_requirements);
+// search.add(mde_requirements);
 
 const colorGenerator = ['#de6764', '#5bc0de', '#5cb85c', '#f0ad4e']
 
@@ -656,8 +1103,18 @@ class App extends Component {
       added_classes: [{}],
       credits_completed: 0,
       credits_required: 128,
-      credits_by_semester: [0,0,0,0]
+      credits_by_semester: [0,0,0,0],
+   	  requirements: cse_requirements.requirements
     };
+    const all_courses = ULCS.concat(FTE).concat(program_core).concat(core_requirements).concat(mde_requirements);
+    console.log("ALL COURSES");
+    console.log(all_courses);
+    for(var i = 0; i < all_courses.length; i++){
+      search.add(all_courses[i]);
+    }
+    console.log("SEARCH COURSES");
+    console.log(search);
+    console.log(search.search("ULCS"));
 
 
     this.onDragEnd = this.onDragEnd.bind(this);
@@ -666,6 +1123,8 @@ class App extends Component {
     this.get_added_classes = this.get_added_classes.bind(this);
     this.remove_course = this.remove_course.bind(this);
     this.get_heat_bar = this.get_heat_bar.bind(this);
+    this.updateRequirement = this.updateRequirement.bind(this);
+    //this.getSatisfied = this.getSatisfied.bind(this);
   }
 
   updateCredits(course_credits){
@@ -766,12 +1225,49 @@ class App extends Component {
     this.removeCss();
   }
 
+  updateRequirement(added_course){
+  	console.log("ADDED COURSE");
+  	for(var i = 0; i < this.state.requirements.length; i++){
+		for(var j = 0; j < this.state.requirements[i].req_rows.length; j++){
+			for(var k = 0; k < this.state.requirements[i].req_rows[j].courses.length; k++){
+				if(this.state.requirements[i].req_rows[j].courses[k].course_num == added_course.course_num && 
+					this.state.requirements[i].req_rows[j].courses[k].course_subject == added_course.subject){
+					console.log(this.state.requirements[i].req_rows[j].courses[k]);
+					// if(added_course.credits + this.state.requirements[i].req_rows[j].courses[k].num_credits_satisfied >= this.state.requirements[i].req_rows[j].courses[k].num_credits){
+						const element = (<div>{this.getSatisfied.bind(this.state.requirements[i].req_rows[j].courses[k].num_credits, this.state.requirements[i].req_rows[j].courses[k].num_credits)}</div>);
+						document.getElementById(this.state.requirements[i].req_rows[j].sub_req_name).querySelector('li').classList.add('green')
+						return;
+					// }
+				}
+			}
+		}
+  	}
+  }
+
+getSatisfied(num_credits_satisfied, num_credits) {
+if(num_credits_satisfied >= num_credits) {
+  return (
+    <ul className={s.checkmark}>
+      <li></li>
+    </ul>
+  );
+}
+return(
+  <ul className={s.xmark}>
+    <li></li>
+  </ul>
+);
+}
+
   updateView (semester_id, course_id){
+  	console.log("COURSE:");
     const course = this.state.search_classes[course_id];
+  	console.log(course);
     course.semester_id = semester_id;
     this.setState({
       added_classes: this.state.added_classes.concat(course)
     });
+    this.updateRequirement(course);
   }
 
   remove_course(course, index) {
@@ -804,6 +1300,20 @@ class App extends Component {
      );
     console.log("Removed");
   }
+  enterSearch(search_val){
+    console.log("search_val");
+    console.log(search_val);
+    console.log("search");
+    console.log(search);
+    var results = search.search(search_val);
+    console.log("results");
+    console.log(results);
+    this.setState({
+      search_classes: results
+    }, () => {
+      console.log("New state in ASYNC callback:", this.search_classes);
+    });
+  }
 
   get_added_classes(id, index){
     const classes = this.state.added_classes.reduce((acc, course) => {
@@ -834,6 +1344,7 @@ class App extends Component {
         document.getElementById(heat_id)
     );
   }
+
 
   onDragEnd (result) {
     // Dropped into the semester tables
@@ -886,7 +1397,7 @@ class App extends Component {
             <IntlProvider locale={this.state.lang} messages={this.state.message}>
               <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className={`dashboard-page ${s.dashboardPage}`}>
-                  <Header logname={this.state.logname} program={this.state.program} />
+                  <Header logname={this.state.logname} program={this.state.program} enterSearch={this.enterSearch.bind(this)} />
                   }
                   }
                   <Sidebar onDragEnd={this.onDragEnd} search_classes={this.state.search_classes} />

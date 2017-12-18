@@ -78,6 +78,10 @@ class SignUp extends Component {
                     className={s.inputStyle}
                   />
                 </FormGroup>
+                <div className={s.fileinput}>
+                  <input type="file" name="file" id="file" />
+                  <button className={s.btnfileinput}>Import Course History</button>
+                </div>
                 <FormGroup>
                   <div className={s.dropdown}>
                     <Dropdown type="text" options={options} value={this.state.program} onChange={this.handleProgram.bind(this)} placeholder="Select your degree program" />

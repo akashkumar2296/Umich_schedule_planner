@@ -83,3 +83,26 @@
       color: white;
     }
 }
+
+.fileinput {
+  color: white;
+}
+
+.fileinput > input[type="file"] {
+  font-size: 25px;
+  position: absolute;
+  width: 190px;
+  opacity: 0;
+  left: 25%;
+  right: 25%;
+}
+
+.btnfileinput {
+  display: inline-block;
+  height: 40px;
+  border: 2px solid white;
+  background-color: #3ca2e0;
+  border-color: #8cc8ed;
+  color: #8cc8ed;
+  font-size: 16px;
+}

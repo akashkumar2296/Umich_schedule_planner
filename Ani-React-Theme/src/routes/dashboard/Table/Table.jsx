@@ -494,7 +494,6 @@ class Tables extends Component {
 
   //Load the classes corresponding to each requirement category
   loadClasses(req){
-    console.log(this);
     if(req.req_name == "Core Requirements"){
       this.context.setCore();
     }
@@ -548,7 +547,6 @@ class Tables extends Component {
       var semester_name = all_semesters[i%4] + ' ' + year
       var panel_style = panel_styles[i%4];
       var id = 'droppable' + semester_id;
-      console.log(panel_style);
       semester_id++;
       semester_items.push({
         semesters: semester_name,
@@ -680,7 +678,7 @@ class Tables extends Component {
                     <tr>
                       <td>{row.sub_req_name}</td>
                       <td>{row.num_credits_satisfied}/{row.num_credits}</td>
-                        {this.getSatisfied(row.num_credits_satisfied, row.num_credits)}
+                        <div id={row.sub_req_name}>{this.getSatisfied(row.num_credits_satisfied, row.num_credits)}</div>
                     </tr>
                   ),
                 )}

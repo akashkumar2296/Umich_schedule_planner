@@ -40,6 +40,11 @@ ul.checkmark li {
 		top: 40%;
 		margin-top: -.5em;
 	}
+	&.green {
+		&:before{
+			border-color: green;
+		}
+	}
 }
 
 ul.xmark li {
@@ -58,6 +63,19 @@ ul.xmark li {
 		left: .5em;
 		top: 40%;
 		margin-top: -.5em;
+	}
+	&.green {
+		&:before{
+			border-color: green;
+		}
+	}
+}
+
+li {
+	&.green {
+		&:before{
+			border-color: green;
+		}
 	}
 }
 

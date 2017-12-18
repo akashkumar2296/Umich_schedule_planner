@@ -26,6 +26,7 @@
     "fbjs": "0.8.4",
     "font-awesome": "^4.6.3",
     "front-matter": "2.1.0",
+    "full-text-search": "0.0.16",
     "history": "^3.0.0",
     "hover.css": "^2.0.2",
     "install": "^0.8.2",

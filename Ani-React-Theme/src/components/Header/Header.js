@@ -41,11 +41,28 @@ class TopNav extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      rtlClass: true
+      rtlClass: true,
     }
     this.rightToLeft = this.rightToLeft.bind(this);
     this.changeLanguage = this.changeLanguage.bind(this);
     this.showMenu = this.showMenu.bind(this);
+    this.submitSearch = this.submitSearch.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      searchInput: ''
+    })
+  }
+
+  submitSearch(event){
+    console.log(event.target.value);
+    this.props.enterSearch(event.target.value);
+    this.setState({
+      searchInput: event.target.value
+    }, () => {
+      console.log("New state in ASYNC callback:", this.state.searchInput);
+    });
   }
 
 
@@ -69,7 +86,9 @@ class TopNav extends Component{
           <form className={"navbar-form " + s.navbarForm + " navbar-left"} role="search">
             <span className={"glyphicon glyphicon-search " + s.glyphiconStyle}  />
             <div className="form-group">
-              <input type="text" className={"form-control " + s.formControl} placeholder="Search Classes" />
+              <input type="text" className={"form-control " + s.formControl}
+              value={this.state.searchInput}
+              placeholder="Search Classes" onChange={this.submitSearch} />
             </div>
           </form>
         </div>
